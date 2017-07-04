@@ -1,0 +1,402 @@
+[
+    {
+        "name": "parallelism",
+        "category": "adapter"
+    },
+    {
+        "name": "collaboration",
+        "category": "extranet"
+    },
+    {
+        "name": "ability",
+        "category": "circuit"
+    },
+    {
+        "name": "definition",
+        "category": "paradigm"
+    },
+    {
+        "name": "architecture",
+        "category": "local area network"
+    },
+    {
+        "name": "core",
+        "category": "adapter"
+    },
+    {
+        "name": "conglomeration",
+        "category": "installation"
+    },
+    {
+        "name": "firmware",
+        "category": "function"
+    },
+    {
+        "name": "interface",
+        "category": "circuit"
+    },
+    {
+        "name": "toolset",
+        "category": "adapter"
+    },
+    {
+        "name": "open system",
+        "category": "adapter"
+    },
+    {
+        "name": "access",
+        "category": "local area network"
+    },
+    {
+        "name": "local area network",
+        "category": "paradigm"
+    },
+    {
+        "name": "middleware",
+        "category": "installation"
+    },
+    {
+        "name": "secured line",
+        "category": "function"
+    },
+    {
+        "name": "algorithm",
+        "category": "paradigm"
+    },
+    {
+        "name": "ability",
+        "category": "installation"
+    },
+    {
+        "name": "system engine",
+        "category": "adapter"
+    },
+    {
+        "name": "groupware",
+        "category": "extranet"
+    },
+    {
+        "name": "matrices",
+        "category": "extranet"
+    },
+    {
+        "name": "encryption",
+        "category": "paradigm"
+    },
+    {
+        "name": "pricing structure",
+        "category": "circuit"
+    },
+    {
+        "name": "knowledge user",
+        "category": "function"
+    },
+    {
+        "name": "moratorium",
+        "category": "local area network"
+    },
+    {
+        "name": "focus group",
+        "category": "adapter"
+    },
+    {
+        "name": "installation",
+        "category": "function"
+    },
+    {
+        "name": "throughput",
+        "category": "installation"
+    },
+    {
+        "name": "structure",
+        "category": "function"
+    },
+    {
+        "name": "knowledge base",
+        "category": "benchmark"
+    },
+    {
+        "name": "open architecture",
+        "category": "benchmark"
+    },
+    {
+        "name": "adapter",
+        "category": "circuit"
+    },
+    {
+        "name": "ability",
+        "category": "function"
+    },
+    {
+        "name": "approach",
+        "category": "installation"
+    },
+    {
+        "name": "superstructure",
+        "category": "function"
+    },
+    {
+        "name": "parallelism",
+        "category": "extranet"
+    },
+    {
+        "name": "portal",
+        "category": "benchmark"
+    },
+    {
+        "name": "structure",
+        "category": "installation"
+    },
+    {
+        "name": "alliance",
+        "category": "adapter"
+    },
+    {
+        "name": "support",
+        "category": "local area network"
+    },
+    {
+        "name": "architecture",
+        "category": "benchmark"
+    },
+    {
+        "name": "challenge",
+        "category": "installation"
+    },
+    {
+        "name": "project",
+        "category": "function"
+    },
+    {
+        "name": "definition",
+        "category": "adapter"
+    },
+    {
+        "name": "superstructure",
+        "category": "benchmark"
+    },
+    {
+        "name": "productivity",
+        "category": "function"
+    },
+    {
+        "name": "help-desk",
+        "category": "extranet"
+    },
+    {
+        "name": "artificial intelligence",
+        "category": "function"
+    },
+    {
+        "name": "implementation",
+        "category": "local area network"
+    },
+    {
+        "name": "paradigm",
+        "category": "circuit"
+    },
+    {
+        "name": "archive",
+        "category": "paradigm"
+    },
+    {
+        "name": "open system",
+        "category": "extranet"
+    },
+    {
+        "name": "website",
+        "category": "extranet"
+    },
+    {
+        "name": "toolset",
+        "category": "extranet"
+    },
+    {
+        "name": "support",
+        "category": "circuit"
+    },
+    {
+        "name": "task-force",
+        "category": "extranet"
+    },
+    {
+        "name": "projection",
+        "category": "adapter"
+    },
+    {
+        "name": "installation",
+        "category": "circuit"
+    },
+    {
+        "name": "contingency",
+        "category": "adapter"
+    },
+    {
+        "name": "time-frame",
+        "category": "benchmark"
+    },
+    {
+        "name": "info-mediaries",
+        "category": "installation"
+    },
+    {
+        "name": "pricing structure",
+        "category": "paradigm"
+    },
+    {
+        "name": "time-frame",
+        "category": "circuit"
+    },
+    {
+        "name": "forecast",
+        "category": "function"
+    },
+    {
+        "name": "emulation",
+        "category": "benchmark"
+    },
+    {
+        "name": "definition",
+        "category": "local area network"
+    },
+    {
+        "name": "adapter",
+        "category": "installation"
+    },
+    {
+        "name": "capability",
+        "category": "extranet"
+    },
+    {
+        "name": "capacity",
+        "category": "benchmark"
+    },
+    {
+        "name": "workforce",
+        "category": "benchmark"
+    },
+    {
+        "name": "array",
+        "category": "function"
+    },
+    {
+        "name": "emulation",
+        "category": "function"
+    },
+    {
+        "name": "structure",
+        "category": "function"
+    },
+    {
+        "name": "benchmark",
+        "category": "local area network"
+    },
+    {
+        "name": "system engine",
+        "category": "function"
+    },
+    {
+        "name": "ability",
+        "category": "adapter"
+    },
+    {
+        "name": "portal",
+        "category": "adapter"
+    },
+    {
+        "name": "groupware",
+        "category": "circuit"
+    },
+    {
+        "name": "function",
+        "category": "local area network"
+    },
+    {
+        "name": "protocol",
+        "category": "extranet"
+    },
+    {
+        "name": "website",
+        "category": "adapter"
+    },
+    {
+        "name": "utilisation",
+        "category": "function"
+    },
+    {
+        "name": "Graphic Interface",
+        "category": "extranet"
+    },
+    {
+        "name": "synergy",
+        "category": "local area network"
+    },
+    {
+        "name": "time-frame",
+        "category": "benchmark"
+    },
+    {
+        "name": "encoding",
+        "category": "extranet"
+    },
+    {
+        "name": "complexity",
+        "category": "paradigm"
+    },
+    {
+        "name": "infrastructure",
+        "category": "circuit"
+    },
+    {
+        "name": "data-warehouse",
+        "category": "paradigm"
+    },
+    {
+        "name": "application",
+        "category": "installation"
+    },
+    {
+        "name": "definition",
+        "category": "extranet"
+    },
+    {
+        "name": "interface",
+        "category": "circuit"
+    },
+    {
+        "name": "neural-net",
+        "category": "extranet"
+    },
+    {
+        "name": "website",
+        "category": "circuit"
+    },
+    {
+        "name": "protocol",
+        "category": "function"
+    },
+    {
+        "name": "encryption",
+        "category": "local area network"
+    },
+    {
+        "name": "strategy",
+        "category": "adapter"
+    },
+    {
+        "name": "policy",
+        "category": "extranet"
+    },
+    {
+        "name": "structure",
+        "category": "benchmark"
+    },
+    {
+        "name": "success",
+        "category": "function"
+    },
+    {
+        "name": "solution",
+        "category": "installation"
+    }
+]

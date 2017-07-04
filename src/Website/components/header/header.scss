@@ -1,0 +1,39 @@
+header{
+    position: relative;
+
+    &>*{
+        height: 100%;
+    }
+
+    .content{
+        padding-top: 10%;
+        padding-bottom: 5%;
+    }
+
+    nav{
+
+        padding-top: 1rem;
+
+        ul{
+
+            margin:0;
+            
+
+
+            li{
+                float: right;
+                list-style: none;
+                margin-left: 20px;
+                text-transform: uppercase;
+                color: white;
+            }
+
+            &::after{
+                content: '';
+                display: block;
+                clear: both;
+            }
+        }
+    }
+
+}

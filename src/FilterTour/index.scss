@@ -1,0 +1,20 @@
+.filter-tour{
+    position: relative;
+
+    *{
+        cursor: none !important;
+    }
+
+    .cursor{
+        position: absolute;
+        z-index:10;
+
+        &::after{
+            display: block;
+            content: '\f245';
+            font-family: FontAwesome;
+            position: absolute;
+        }
+    }
+
+}

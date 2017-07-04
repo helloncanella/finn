@@ -1,0 +1,47 @@
+@import 'home';
+
+body, .home-page{
+    position: relative;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.home-page{
+    
+
+    .row{
+        max-width: 90rem !important;
+    }
+
+    //overlay
+    .overlay{
+        display:block;
+        content: ''; 
+        position: absolute;
+        width: 100%;
+        height:100%;
+        z-index: 0;
+        background: -webkit-gradient(linear, left top, left bottom, from(rgba(62,145,109,0.8)), color-stop(13%, rgba(53,124,102,1)), color-stop(63%, rgba(34,88,67,1)), color-stop(99%, rgba(32,108,81,1)));
+        background: -webkit-linear-gradient(top, rgba(62,145,109,0.8) 0%, rgba(53,124,102,1) 13%, rgba(34,88,67,1) 63%, rgba(32,108,81,1) 99%);
+        background: -o-linear-gradient(top, rgba(62,145,109,0.8) 0%, rgba(53,124,102,1) 13%, rgba(34,88,67,1) 63%, rgba(32,108,81,1) 99%);
+        background: linear-gradient(to bottom, rgba(62,145,109,0.8) 0%, rgba(53,124,102,1) 13%, rgba(34,88,67,1) 63%, rgba(32,108,81,1) 99%);
+
+        @media screen and (min-width:1024px){
+            background: -webkit-gradient(linear, left top, left bottom, from(rgba(62,145,109,0.8)), color-stop(18%, rgba(53,124,102,1)), color-stop(63%, rgba(34,88,67,1)), color-stop(99%, rgba(32,108,81,1)));
+            background: -webkit-linear-gradient(top, rgba(62,145,109,0.8) 0%, rgba(53,124,102,1) 18%, rgba(34,88,67,1) 63%, rgba(32,108,81,1) 99%);
+            background: -o-linear-gradient(top, rgba(62,145,109,0.8) 0%, rgba(53,124,102,1) 18%, rgba(34,88,67,1) 63%, rgba(32,108,81,1) 99%);
+            background: linear-gradient(to bottom, rgba(62,145,109,0.8) 0%, rgba(53,124,102,1) 18%, rgba(34,88,67,1) 63%, rgba(32,108,81,1) 99%);
+
+        }
+
+    }
+
+    button{
+        @media screen and (orientation:landscape) and (max-width:639px){
+                width: 100/3 * 1%;
+            }
+    }
+    
+}
+
+

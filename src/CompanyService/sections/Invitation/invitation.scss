@@ -1,0 +1,21 @@
+$blue-gray: #525F7F;
+
+.invitation{
+    $p: 3.5rem;
+    padding-top: $p;
+    padding-bottom: $p;
+
+    p{
+        color: $blue-gray;
+    }
+
+    .column{
+        display: flex;
+        flex-direction: column;
+
+        button{
+            margin-top: 1.5rem;
+            align-self: flex-end;
+        }
+    }
+}

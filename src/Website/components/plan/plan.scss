@@ -1,0 +1,47 @@
+.plan{
+    margin-bottom: 6rem;
+
+    .border-top{
+        padding-bottom:1.5rem;
+        width: 80%;
+    }
+
+    .title{
+        text-align: left !important;
+        color: initial !important;
+        margin-bottom: 1rem !important;
+    }
+
+
+}
+
+ul.features{
+    padding: 0;
+    margin:0;
+    
+    li.feature{
+
+        $s: 1.7rem;
+        margin-bottom: 0.9rem;
+
+        .name{
+            margin-left: $s;
+            font-weight: 400;
+            margin-bottom: 0.25rem;
+        }
+
+        .description{
+            padding-left: $s;
+            &:before{
+                content: "\f00c"; /* FontAwesome Unicode */
+                font-family: FontAwesome;
+                color: green;
+                display: inline-block;
+                margin-left: -$s; /* same as padding-left set on li */
+                width: $s; /* same as padding-left set on li */
+            }
+        }
+    }
+
+}
+

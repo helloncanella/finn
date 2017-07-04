@@ -1,0 +1,35 @@
+[
+	{
+		"description": "Vergleichen Sie die Tools mit dem Toolfinder (link) und machen Sie eine erste, zu Ihrem Bedarf passende Auswahl. Im Anschluss nehmen Sie entweder direkt        Kontakt zu den Anbietern auf – oder Sie registrieren sich und nehmen zusätzliche        Dienstleistungen in Anspruch:"
+	},
+	{
+		"description": "Nutzen Sie einen zeitlich begrenzten Zugang zu der erweiterten Suchfunktion inkl. Listenansicht, mit der Sie die Tools gezielt miteinander vergleichen können"
+	},
+	{
+		"description": "Profitieren Sie von unserer personalisierten Beratung bei der Auswahl von Tools. Dabei werden folgende Kriterien berücksichtigt:",
+		"action": {
+			"description": "call to action",
+			"link": "#"
+		},
+		"features": [
+			{
+				"name": "Passung",
+				"description": "(Branche, Größe, Kultur, Internationaler Einsatz, Organisationale Anforderungen)"
+			},
+			{
+				"name": "Ergebnisbedarf",
+				"description": "(Einsatzgebiete, Zielgruppen, Sprachen, Merkmale, Auswertungen, Integration Kompetenzmodell, weiterführende Maßnahmen)"
+			},
+			{
+				"name": "Technische Anpassungsleistung"
+			},
+			{
+				"name": "Angebotsmanagement:",
+				"description": "Konkrete Aufwendungen und Kosten"
+			},
+			{
+				"name": "Durchführung eigener Testläufe"
+			}
+		]
+	}
+]

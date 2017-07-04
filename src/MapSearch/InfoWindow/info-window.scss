@@ -1,0 +1,178 @@
+.info-window{
+    $green: #53BE90;
+    $gridPadding: 12px;
+    $borderRadius: 3px;
+
+    width: 300px;
+    box-shadow: 0px 0px 15px gray;
+    border-radius: $borderRadius;
+    background-color: white;
+
+    //aligning (gambiarra)
+    position: relative;
+    top: 35px;
+    left: 27px;
+
+    .close-button{
+        position: absolute;
+        top: $gridPadding;
+        right: $gridPadding;
+        border-radius: $borderRadius;
+        background-color: $green;
+        
+        $s: 30px;
+        width: $s;
+        height: $s;
+
+        &::after{
+            display: block;
+            content: '\f00d';
+            font-family: FontAwesome;
+            color: white;
+            font-size:24px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    }
+
+    header{
+        &, img{
+            border-radius:  $borderRadius $borderRadius 0 0; 
+        }
+    }
+
+    main{
+        padding-left: $gridPadding;
+        padding-right: $gridPadding;
+
+        $p: 10px;
+        padding-top: $p;
+        padding-bottom: $p;
+
+        .name{
+            margin: 0;
+
+            &::selection{
+                background: #E3E9ED;
+            }
+        }
+
+        hr{
+            border-bottom: 2px solid $green;
+            margin: 0;
+            margin-top: 5px;
+        }
+
+        .internal-padding{
+            $p:  $gridPadding/3;
+            padding-left: $p;
+            padding-right: $p;
+        }
+
+        .rectangles {
+            margin-top: 10px;
+
+            &>*{
+                $size: 30px;
+                width: $size;
+                height: $size;
+                float: left;
+                margin-right: 10px;
+            }
+
+            &::after{
+                display: block;
+                content: '';
+                clear: both;
+            }
+
+            .rectangle{
+                background: #F4F8FA;
+                border-radius: 3px;
+                border: 1px solid #E3E9ED;    
+                
+                
+                &.filled{
+                    background: $green;
+                    border: 1px solid $green;          
+                }
+
+            }
+
+            
+        }
+    }
+
+    footer{
+        background: $green;
+        padding: $gridPadding;
+        position: relative;
+
+        $p: 10px;
+        padding-top: $p;
+        padding-bottom: $p;
+        border-radius: 0 0 $borderRadius $borderRadius;
+        
+
+        .go-to-profile{
+            text-align: right;
+            color: white;
+            margin: 0;
+            user-select: none;            
+
+            span{
+                cursor: pointer;
+            }
+        }
+
+        .marker{
+            $s: 35px;
+            
+            margin-top: -15px;
+            background: $green;
+            width: $s;
+            height: $s;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%,0) rotate(-45deg);
+        }
+    }
+    
+
+}
+
+.gm-style-iw{
+    position: static !important;
+    max-width:none !important;
+    width: auto !important;
+    overflow: visible !important;
+    
+    & ~ *{
+        display:none !important
+    }
+
+    &>*{
+        overflow: visible !important;
+    }
+
+}
+
+.gm-style-iw > * {
+    max-width: none !important;
+    max-height: none !important;
+    
+}
+
+
+//Removing weird background
+#map > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1){
+    display: none;
+}
+
+#map > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div{
+    height: auto !important;
+    width: auto !important;
+}
+

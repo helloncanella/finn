@@ -1,0 +1,79 @@
+.about-page{
+    header .content {
+        padding-top: 15%;
+    }
+
+    $green: #53BE90;
+
+    .grid{
+        .component{
+            padding: 0.7rem  0.7rem 0;
+            margin-bottom: 1.8rem;
+
+            .content{
+                padding-top: 9rem;
+            }
+
+            .buttons{
+                .button{
+                    margin-right: 10px;
+                    width: 100px;
+                    height: 35px;
+                    background: $green;
+                }
+            }
+        }
+    }
+
+    .evolution-line{
+        position: relative;
+
+        .crossline{
+            transform: translate(50%,-5%); 
+            position: absolute;
+            width: 18.5%;
+            height:105%;
+            z-index:-1;
+            border-left:2px solid $green !important;
+            
+            @media screen and(min-width:1020px){
+                width:19%;
+            }
+
+            @media screen and(min-width:1200px){
+                width:20%;
+            } 
+        }
+
+        .history-item{
+            margin-bottom:2.5rem;
+            
+            .title{
+                text-align: initial !important;
+                margin-bottom: initial !important;
+                color: initial !important;
+                font-weight: initial !important;
+            }
+
+            .year{
+                padding-top:5px;
+         
+                .rectangle{
+                    background: $green;
+                    text-align: center;
+                    color: white;
+                    font-size: 1.1em;
+                    border-radius: 4px;
+
+                    &>span{
+                        padding: 0.4rem;
+                        font-weight: 400;
+                        display: inline-block;
+                    }
+                }
+            }
+
+        }
+
+    }
+}

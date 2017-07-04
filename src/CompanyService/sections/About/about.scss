@@ -1,0 +1,18 @@
+$peats-green: #53BE90;
+
+
+.about{
+    $m: 3rem;
+
+    &>.title{
+        border-bottom: 1px solid $peats-green;
+        margin-bottom: $m; 
+    }
+
+    .characterists{
+        .characterist{
+            margin-bottom: $m;
+            
+        }
+    }
+}

@@ -1,0 +1,96 @@
+$grey: #D9D9D9;
+$blue: #00A5E9;
+$red: #EB5D5F;
+$red-hover: #C14E4F;
+$peats-green: #53BE90;
+
+h1 {
+    font-size: 36px;
+    font-weight: 400;
+    @media screen and (max-width: 1024px) {
+        font-size: 32px;
+    }
+    @media screen and (max-width: 640px) {
+        font-size: 27px;
+    }
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 400;
+    @media screen and (max-width: 1024px) {
+        font-size: 21px;
+    }
+    @media screen and (max-width: 640px) {
+        font-size: 19px;
+    }
+}
+
+h3 {
+    font-size: 22px;
+    font-weight: 500;
+    @media screen and (max-width: 640px) {
+        font-size: 19px;
+    }
+}
+
+h4 {
+    font-size: 19px;
+    font-weight: 400;
+}
+
+p {
+    font-size: 19px;
+    font-weight: 400;
+    color: $grey;
+    @media screen and (max-width: 640px) {
+        font-size: 17px;
+    }
+
+    &.small {
+        font-size: 17px;
+        font-weight: 400;
+        @media screen and (max-width: 640px) {
+            font-size: 15px;
+        }
+    }
+}
+
+a {
+    font-size: 17pt;
+    font-weight: 400;
+    color: $blue;
+
+    &:hover {
+      text-decoration: underline;
+    }
+}
+
+button {
+    font-size: 17pt;
+    font-weight: 400;
+    padding: 10px, 15px;
+    background-color: $red;
+    border: 1px solid $red;
+    border-radius: 4px;
+
+    &:hover {
+        color: $red-hover;
+        border: 1px solid $red-hover;
+    }
+}
+
+.categoryIcons {
+    height: 35px;
+    width: 35px;
+    border: 1px solid $peats-green;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s linear;
+    background-color: $peats-green;
+    color: white;
+}

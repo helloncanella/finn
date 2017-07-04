@@ -1,0 +1,54 @@
+.filter-component{
+    font-size: 15pt !important;
+    padding-top: 5rem;
+    position: relative;
+
+    *{
+        box-sizing: border-box; 
+        font-family: 'Roboto', sans-serif !important; 
+        font-weight: 300;
+    }
+
+    .list{
+        &.categories, &.characteristics{
+            .title{
+                color: #19544D;
+            }
+        }
+
+        &.adequated-tools{
+            .title{
+                color: #EA5153
+            }
+        }
+
+    }
+
+    .protection-layer{
+        position: relative;
+        z-index: 1000;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        background: none;
+    }
+
+    //scrollbar
+    ::-webkit-scrollbar {
+        width: 3%;
+        background:transparent;
+        // display: none;
+    } 
+    
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3); 
+        border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3); 
+    }
+}
+
+

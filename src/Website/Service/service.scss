@@ -1,0 +1,22 @@
+.service-page{
+    //enlarging the space between the plans columns
+    @media screen and (min-width: 64em){
+        .plans{
+            .column{
+                $p: 2rem;
+
+                &:nth-child(2n+1){
+                    padding-right: $p;
+                }
+
+                &:nth-child(2n){
+                    padding-left: $p;
+                }
+            }
+        }
+    }
+}
+
+
+
+
