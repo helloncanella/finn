@@ -1,9 +1,44 @@
 import React, { Component } from "react"
-
-import "./style.scss"
+// import "./style.scss"
 
 class Dashboard extends Component {
+  constructor() {
+    super()
+    this.state = {
+      stepIndex: 0
+    }
+
+    this.next = this.next.bind(this)
+    this.back = this.back.bind(this)
+
+    this.onAdvance = this.onAdvance.bind(this)
+
+    this.steps = []
+  }
+
+  next() {
+    this.setState({ stepIndex: ++this.state.stepIndex })
+  }
+
+  back() {
+    this.state.stepIndex > 0 &&
+      this.setState({ stepIndex: --this.state.stepIndex })
+  }
+
+  onAdvance(){
+    console.log('oi')
+  }
+
   render() {
+    let {children} = this.props
+
+    children = Array.isArray(children) ? children: [children]
+
+    children = children.map(child=>{
+      let props = child.props || {}  
+      return React.cloneElement(child, {...props, ref: e=>this.steps.push(e)})
+    })
+
     return (
       <div className="layout">
         <aside />
@@ -51,19 +86,22 @@ class Dashboard extends Component {
                 </div>
               </div>
               <div className="children row">
-                <div className="form-section small-12" />
-                <div className="form-section small-12" />
-              </div> 
+                {children[this.state.stepIndex]}
+              </div>
               <div className="controls row">
-                <div className="back button" >Zurück</div>
-                <div className="next button"> Speichern</div>
+                {this.state.stepIndex>0 &&<div className="back button" onClick={this.back}>
+                  Zurück
+                </div>}
+                <div className="next button" onClick={this.onAdvance}>
+                  {" "}Speichern
+                </div>
               </div>
             </div>
           </div>
         </main>
       </div>
     )
-  } 
+  }
 }
 
 export default Dashboard
