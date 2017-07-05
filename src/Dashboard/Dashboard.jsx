@@ -14,6 +14,7 @@ class Dashboard extends Component {
     this.onAdvance = this.onAdvance.bind(this)
 
     this.steps = []
+
   }
 
   next() {
@@ -26,13 +27,14 @@ class Dashboard extends Component {
   }
 
   onAdvance() {
-    
-    if (this.steps.length) {
-      const step = this.steps[this.state.stepIndex]
+   
+    const step = this.steps && this.steps[this.state.stepIndex]
 
+    if (step) {
       try {
         step.validate && step.validate()
       } catch (e) {
+        console.error(e.message)
         return
       }
 
@@ -40,25 +42,44 @@ class Dashboard extends Component {
         this.props.save(step.getValues())
       }
 
-      this.next()
+      if(!this.isLastStep()) this.next()
     }
   }
 
-  children() {
+  isLastStep = () =>{   
+    return this.state.stepIndex === (this.steps.length-1)
+  }
+
+
+
+  getChildren() {
     let { children } = this.props
+   
+    const allChildren = Array.isArray(children) ? children : [children]
 
-    children = Array.isArray(children) ? children : [children]
-
-    return children.map(child => {
-      let props = child.props || {}
+    return allChildren.map((child,index) => {
+      let props = child.props || {}   
+   
       return React.cloneElement(child, {
         ...props,
-        ref: e => this.steps.push(e)
+        style: {display: index !== this.state.stepIndex && 'none'},
+        ref: e => {
+           this.steps.push(e)
+        }
       })
     })
+
+  }
+
+  componentDidUpdate(){
+    console.log(this.children[1].props)
   }
 
   render() {
+    if(!this.children) this.children = this.getChildren()
+
+    
+
     return (
       <div className="layout">
         <aside />
@@ -106,7 +127,7 @@ class Dashboard extends Component {
                 </div>
               </div>
               <div className="children row">
-                {this.children()[this.state.stepIndex]}
+                {this.children}
               </div>
               <div className="controls row">
                 {this.state.stepIndex > 0 &&
