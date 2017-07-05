@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-// import "./style.scss"
 
 class Dashboard extends Component {
   constructor() {
@@ -53,9 +52,9 @@ class Dashboard extends Component {
   getChildren() {
     return React.Children.map(this.props.children, (child, index) => {
       const isNotCurrentStep = index !== this.state.stepIndex
-      
+
       const style = { display: isNotCurrentStep ? "none" : "block" }
-      
+
       const props = {
         ...child.props,
         style,
@@ -99,6 +98,30 @@ class Dashboard extends Component {
     )
   }
 
+  stepsDescription() {
+    const { children } = this.props
+
+    const steps = React.Children.map(children, (child, index) => {
+      const name = child.props.name
+      const destakClass = index === this.state.stepIndex ? "current" : null
+
+      return (
+        <div className={`step ${destakClass}`} key={`step-${index}`}>
+          <div className="bullet" />
+          <h6 className="description">
+            {name}
+          </h6>
+        </div>
+      )
+    })
+
+    return (
+      <div className="steps">
+        {steps}
+      </div>
+    )
+  }
+
   top() {
     return (
       <div className="top row">
@@ -115,28 +138,7 @@ class Dashboard extends Component {
           <h3 className="title">Editieren</h3>
           <div className="sequences">
             <div className="line" />
-            <div className="steps">
-              <div className="step current">
-                <div className="bullet" />
-                <h6 className="description">Profil/Kontak</h6>
-              </div>
-              <div className="step">
-                <div className="bullet" />
-                <h6 className="description">Fotos</h6>
-              </div>
-              <div className="step">
-                <div className="bullet" />
-                <h6 className="description">Socialmedia</h6>
-              </div>
-              <div className="step">
-                <div className="bullet" />
-                <h6 className="description">Service</h6>
-              </div>
-              <div className="step">
-                <div className="bullet" />
-                <h6 className="description">Zip/Anhang</h6>
-              </div>
-            </div>
+            {this.stepsDescription()}
           </div>
         </div>
       </div>
@@ -159,7 +161,7 @@ class Dashboard extends Component {
         </main>
       </div>
     )
-  } 
+  }
 }
 
 export default Dashboard
