@@ -1,21 +1,18 @@
 .layout {
   display: flex;
   position: relative;
-  
 
   aside {
     background: black;
     width: 25%;
     position: absolute;
-    height:100%;
-    
+    height: 100%;
   }
 
   main {
     background-color: #eceff1;
     width: 75%;
     margin-left: 25%;
-   
 
     header {
       background: white;
@@ -77,6 +74,8 @@
               margin-right: 10px;
             }
 
+            cursor: pointer;
+
             .bullet {
               $s: 20px;
               width: $s;
@@ -91,9 +90,26 @@
               font-size: 0.8em;
             }
 
+            &.current,
+            &.past {
+              .bullet{
+                background: $green;
+              }
+            }
+
+            &.past {
+
+              .bullet{
+                transform: scale(1.1);
+              }
+
+              .description{
+                color: lightgray;
+              }
+            }
+
             &.current {
               .bullet {
-                background: $green;
                 transform: scale(1.3);
               }
 
@@ -105,62 +121,58 @@
         }
       }
     }
-
   }
 
-  .children{
-    .form-section{
+  .children {
+    .form-section {
       background-color: white;
-    
-      &:not(:last-child){
+
+      &:not(:last-child) {
         margin-bottom: 1.5rem;
       }
-    
     }
   }
 
-  .controls{
-    padding:0.8rem;
+  .controls {
+    padding: 0.8rem;
     background: white;
     margin-top: 1px;
 
-    &.row{
+    &.row {
       display: inherit;
     }
 
-    .button{
+    .button {
       border-radius: 6px;
       margin: 0;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
 
-      &.back{
-        background-color: #BAC5DB;
+      &.back {
+        background-color: #bac5db;
       }
 
-      &.next{
+      &.next {
         background-color: $green;
         float: right;
-      } 
+      }
     }
 
-    &:after{
+    &:after {
       display: block;
       clear: both;
       content: '';
     }
-    
   }
 }
 
-.form-section{
-  &:first-child{
+.form-section {
+  &:first-child {
     height: 500px;
   }
 
-  &:nth-child(2){
-    height:400px;
+  &:nth-child(2) {
+    height: 400px;
   }
 }
-

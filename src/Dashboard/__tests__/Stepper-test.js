@@ -38,20 +38,35 @@ describe("Stepper", () => {
   afterEach(() => (comp = null))
 
   describe("bullets sequence", () => {
-    it("when change the step, change description step", () => {
-      comp = wrapper({
-        children: [<Stub key="1" name="ok" />, <Stub key="2" name="lero" />]
-      }, 'mount')
-
-      clickNext()
-      
-      expect(comp.find(".step.current .description").text()).toBe("lero")
+    beforeEach(() => {
+      comp = wrapper(
+        {
+          children: [
+            <Stub key="1" name="ok" />,
+            <Stub key="2" name="lero" />,
+            <Stub key="3" name="dd" />,
+            <Stub key="4" name="oi" />
+          ]
+        },
+        "mount"
+      )
     })
 
-    describe("click", () => {
-      it("change step", () => {})
+    it("highlight when change the step", () => {
+      clickNext()
+      expect(comp.find(".step.current .description").text()).toBe("lero")
+    })
+    
+    it("when click change step", () => {
+      const bulletIndex = 1
+      comp.find(`.top .step`).at(bulletIndex).simulate("click")
+      expect(state().stepIndex).toBe(bulletIndex)
+    })
 
-      it("change description", () => {})
+    it("past sequeces have secondary hightlight (.past class)", () => {
+      clickNext()
+      clickNext()
+      expect(comp.find(".top .step.past").length).toBe(2)
     })
   })
 

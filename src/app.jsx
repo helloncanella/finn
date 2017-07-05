@@ -1,4 +1,4 @@
-import React from "react"
+import React, {Component} from "react"
 import HomePage from "./HomePage/Index.jsx"
 import Dashboard from "./Dashboard/Dashboard.jsx"
 
@@ -8,16 +8,22 @@ export default class App extends React.Component {
   render() {
     return (
       <Dashboard>
-        <div className="form-section">
-          <h1>Hello</h1>
-        </div>
-        <div className="form-section">
-          <h1>ola</h1>
-        </div>
-        <div className="form-section">
-          <h1>teco</h1>
-        </div>
+        <FormSection name="Hello" />
+        <FormSection name="Trello" />
+        <FormSection name="Bill" />
       </Dashboard>
+    )
+  }
+}
+
+class FormSection extends Component {
+  render() {
+    return (
+      <div className="form-section" style={this.props.style}>
+        <h1>
+          {this.props.name}
+        </h1>
+      </div>
     )
   }
 }

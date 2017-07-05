@@ -98,15 +98,21 @@ class Dashboard extends Component {
     )
   }
 
+  changeStep(stepIndex){
+    this.setState({stepIndex})
+  }
+
   stepsDescription() {
     const { children } = this.props
 
     const steps = React.Children.map(children, (child, index) => {
       const name = child.props.name
-      const destakClass = index === this.state.stepIndex ? "current" : null
+      const destakClass = index === this.state.stepIndex ? "current" : ""
+      const pastClass = index<this.state.stepIndex ? "past" : ""
+      const changeStep = ()=>this.changeStep(index)
 
       return (
-        <div className={`step ${destakClass}`} key={`step-${index}`}>
+        <div className={`step ${pastClass} ${destakClass}`} key={`step-${index}`} onClick={changeStep}>
           <div className="bullet" />
           <h6 className="description">
             {name}
