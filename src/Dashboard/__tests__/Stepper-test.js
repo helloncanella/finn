@@ -5,7 +5,7 @@ import Dashboard from "../Dashboard"
 const wrapper = (props = {}, toMount) => {
   props.children = props.children || <div />
   const component = <Dashboard {...props} />
-  return toMount ? mount(component) : shallow(component)
+  return toMount=='mount' ? mount(component) : shallow(component)
 }
 
 class Stub extends Component{
@@ -13,12 +13,16 @@ class Stub extends Component{
     this.props.validate()
   }
 
+  getValues(){
+    return 2
+  }
+
   render(){
     return null
   }
 }
 
-describe("", () => {
+describe("rendering steps", () => {
   let comp,
     clickBack = () => comp.find(".back").simulate("click"),
     clickNext = () => comp.find(".next").simulate("click"),
@@ -38,9 +42,9 @@ describe("", () => {
   })
 
   it("next button, advance step", () => {
-    setState({ stepIndex: 1 })
+    comp=wrapper({}, 'mount')
     clickNext()
-    expect(state().stepIndex).toEqual(2)
+    expect(state().stepIndex).toEqual(1)
   })
 
   it("back button back", () => {
@@ -49,30 +53,50 @@ describe("", () => {
     expect(state().stepIndex).toEqual(4)
   })
 
-  // test("don't allow negative values for stepIndex", () => {
-  //   comp.setState({ stepIndex: 0 })
-  //   clickBack()
-  //   expect(comp.state().stepIndex).toEqual(0)
-  // })
-
-  test("the back button doesn't appear in the first step", () => {
+ 
+  it("the back button doesn't appear in the first step", () => {
     setState({stepIndex:0})
     expect(comp.find('.back').length).toEqual(0)
   })
 
-  test("once confirm button is pressed it validate the fields", () => {
+  it("once confirm button is pressed it validate the fields", () => {
     const validation = jest.fn(()=>{})
     const children = <Stub validate={validation} />
     
-    comp = wrapper({children})
+    comp = wrapper({children}, 'mount')
     clickNext()
 
     expect(validation).toBeCalled()
   })
 
-  test.skip("if field is valid, collect data")
+  it("if field is valid, collect data and pass to save function", ()=>{
+    const values = {}
+    Stub.prototype.getValues = jest.fn(()=>values)
+  
+    const save = jest.fn()
+    const children = <Stub validate={()=>{}}/> 
 
-  test.skip("if fields are valid, advance")
+    comp = wrapper({children, save}, 'mount')
+    
+    clickNext()
 
-  test.skip("the input values is collected when")
+    expect(save).toBeCalledWith(values)
+  })
+
+
+  it('don\'t advance if step validation fails', ()=>{
+    const validate = jest.fn(()=>{
+      throw new Error(error)
+    })
+
+    comp = wrapper({children: <Stub validate={validate} />}, 'mount')
+    
+    clickNext()
+
+    expect(state().stepIndex).toBe(0)
+
+  })
+
+
+ 
 })

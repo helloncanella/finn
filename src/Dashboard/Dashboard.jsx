@@ -25,20 +25,40 @@ class Dashboard extends Component {
       this.setState({ stepIndex: --this.state.stepIndex })
   }
 
-  onAdvance(){
-    console.log('oi')
+  onAdvance() {
+    
+    if (this.steps.length) {
+      const step = this.steps[this.state.stepIndex]
+
+      try {
+        step.validate && step.validate()
+      } catch (e) {
+        return
+      }
+
+      if (step.getValues && this.props.save) {
+        this.props.save(step.getValues())
+      }
+
+      this.next()
+    }
+  }
+
+  children() {
+    let { children } = this.props
+
+    children = Array.isArray(children) ? children : [children]
+
+    return children.map(child => {
+      let props = child.props || {}
+      return React.cloneElement(child, {
+        ...props,
+        ref: e => this.steps.push(e)
+      })
+    })
   }
 
   render() {
-    let {children} = this.props
-
-    children = Array.isArray(children) ? children: [children]
-
-    children = children.map(child=>{
-      let props = child.props || {}  
-      return React.cloneElement(child, {...props, ref: e=>this.steps.push(e)})
-    })
-
     return (
       <div className="layout">
         <aside />
@@ -86,12 +106,13 @@ class Dashboard extends Component {
                 </div>
               </div>
               <div className="children row">
-                {children[this.state.stepIndex]}
+                {this.children()[this.state.stepIndex]}
               </div>
               <div className="controls row">
-                {this.state.stepIndex>0 &&<div className="back button" onClick={this.back}>
-                  Zurück
-                </div>}
+                {this.state.stepIndex > 0 &&
+                  <div className="back button" onClick={this.back}>
+                    Zurück
+                  </div>}
                 <div className="next button" onClick={this.onAdvance}>
                   {" "}Speichern
                 </div>
