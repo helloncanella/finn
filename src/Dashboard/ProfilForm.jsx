@@ -1,6 +1,13 @@
 import React, { Component } from "react"
+import Input from "./Input"
+import { Textarea, DraftTextarea } from "./Textarea"
 
 class ProfilForm extends Component {
+  constructor() {
+    super()
+    this.fieldsets = []
+  }
+
   render() {
     return (
       <div className="form" style={this.props.style}>
@@ -15,19 +22,36 @@ class ProfilForm extends Component {
         <div className="division" />
         <div className="inputs">
           <div className="row">
-            <div className="small-6 column">
-              <label htmlFor="ok">Name</label>
-              <input type="text" id="ok" placeholder="Name Eigeben"/>
+            <div className="small-6">
+              <Input
+                maxChar={50}
+                ref={e => (this.fieldsets["about.name"] = e)}
+                slug="Name"
+                inputProps={{ placeholder: "Name Eigeben" }}
+              />
             </div>
-            <div className="small-6 column">
-              <label htmlFor="ok">Gründung</label>
-              <input type="text" placeholder="Datum Eingeben TT.MM.JJ"/>
+            <div className="small-6">
+              <Input
+                type={"number"}
+                ref={e => (this.fieldsets["about.founded"] = e)}
+                slug="Gründung"
+                inputProps={{
+                  min: "1970",
+                  max: "2020",
+                  step: "1",
+                  placeholder: "Datum Eingeben TT.MM.JJ"
+                }}
+              />
             </div>
             <div className="small-12 column">
               <div className="row">
-                <div className="small-6 column">
-                  <label htmlFor="ok">Kunden</label>
-                  <input type="text" placeholder="Kunden Auflisten"/>
+                <div className="small-6">
+                  <Input
+                    maxChar={50}
+                    ref={e => (this.fieldsets["about.kunden"] = e)}
+                    slug="Kunden"
+                    inputProps={{ placeholder: "Kunden Auflisten" }}
+                  />{" "}
                 </div>
                 <div className="small-3 column">
                   <small className="input-message">
@@ -38,31 +62,22 @@ class ProfilForm extends Component {
             </div>
             <div className="small-12 column">
               <div className="row textarea-field">
-                <div className="small-2 column">
-                  <label htmlFor="ok">Kurzbeschreibung</label>
-                </div>
-                <div className="small-10 column">
-                  <textarea placeholder="Kurzbeschreibung hinzufügen"/>                    
-                </div>
+                <Textarea
+                maxChar={120}
+                ref={e => (this.fieldsets["about.shortdescription"] = e)}
+                slug="Kurzbeschreibung"
+                horizontalLayout
+              />
               </div>
             </div>
-            <div className="small-12 column">
-              <div className="row textarea-field">
-                <div className="small-2 column">
-                  <label htmlFor="ok">Kurzbeschreibung</label>
-                </div>
-                <div className="small-10 column">
-                  <textarea/>                    
-                </div>
-              </div>
-            </div>
+           
             <div className="small-12 column">
               <div className="row textarea-field">
                 <div className="small-2 column">
                   <label htmlFor="ok">Werte</label>
                 </div>
                 <div className="small-10 column">
-                  <textarea/>                    
+                  <textarea />
                 </div>
               </div>
             </div>
@@ -72,7 +87,7 @@ class ProfilForm extends Component {
                   <label htmlFor="ok">Unternehmen beschreibung</label>
                 </div>
                 <div className="small-10 column">
-                  <textarea/>                    
+                  <textarea />
                 </div>
               </div>
             </div>
@@ -82,7 +97,7 @@ class ProfilForm extends Component {
                   <label htmlFor="ok">Kundenzitat</label>
                 </div>
                 <div className="small-10 column">
-                  <textarea/>                    
+                  <textarea />
                 </div>
               </div>
             </div>

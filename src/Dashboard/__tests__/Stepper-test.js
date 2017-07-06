@@ -56,7 +56,7 @@ describe("Stepper", () => {
       clickNext()
       expect(comp.find(".step.current .description").text()).toBe("lero")
     })
-    
+
     it("when click change step", () => {
       const bulletIndex = 1
       comp.find(`.top .step`).at(bulletIndex).simulate("click")
@@ -149,6 +149,11 @@ describe("Stepper", () => {
 
       clickNext()
       expect(display()).toBe("none")
+    })
+
+    describe.skip("when save", () => {
+      it("on start, show loading spinner ", () => {})
+      it("on end, hide loading spinner", () => {})
     })
 
     describe("if validation fails", () => {
