@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { shallow, mount } from "enzyme"
-import Dashboard from "../Dashboard"
+import Dashboard from "../Stepper"
 
 const wrapper = (props = {}, toMount) => {
   props.children = props.children || <div />
