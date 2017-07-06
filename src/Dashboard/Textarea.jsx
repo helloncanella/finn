@@ -16,28 +16,30 @@ const Textarea = React.createClass({
     this.setState({ chars: e.target.value.length })
   },
   render() {
-    let floatClass = !this.props.horizontalLayout ? 'float-right' : ''
-    let charCountClasses = [`${floatClass} char-count`]
+    let charCountClasses = ["float-right char-count"]
     if (this.isCloseTo()) charCountClasses.push("red")
 
     const textarea = (
-      <textarea
-        ref={e => (this.input = e)}
-        // className={this.props.maxWords > 150 ? "" : "small"}
-        type={this.props.type || "text"}
-        defaultValue={this.props.value}
-        placeholder={this.props.slug}
-        onChange={this.count}
-        maxLength={this.props.maxChar}
-      />
+      <div className="textarea">
+        <textarea
+          ref={e => (this.input = e)}
+          // className={this.props.maxWords > 150 ? "" : "small"}
+          type={this.props.type || "text"}
+          defaultValue={this.props.value}
+          placeholder={this.props.slug}
+          onChange={this.count}
+          maxLength={this.props.maxChar}
+        />
+        <div className={charCountClasses.join(" ")}>
+          {this.state.chars}/{this.props.maxChar}
+        </div>
+      </div>
     )
 
     const label = (
       <label>
         {this.props.slug}
-        <div className={charCountClasses.join(" ")}>
-          Zeichen - {this.state.chars}/{this.props.maxChar}
-        </div>
+        
         {!this.props.horizontalLayout && textarea}
       </label>
     )
@@ -46,10 +48,10 @@ const Textarea = React.createClass({
       return (
         <div className="small-12 textarea column">
           <div className="row">
-            <div className="small-2 column">
+            <div className="small-3 large-2 column">
               {label}
             </div>
-            <div className="small-10 column">
+            <div className="small-9 large-10 column">
               {textarea}
             </div>
           </div>

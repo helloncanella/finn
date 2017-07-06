@@ -169,6 +169,10 @@
 .form {
   padding: 1rem;
 
+  .row{
+    margin-top:0.9rem;
+  }
+
   .division {
     border-top: 2px solid #eceff1;
     width: 150%;
@@ -184,7 +188,7 @@
       width: 100%;
       border: 2px solid hsl(0, 0%, 93%);
       box-shadow: none;
-      font-size: 1em;
+      font-size: 1rem;
     }
 
     .input-message {
@@ -192,8 +196,19 @@
       display: block;
     }
 
+    .textarea{
+      // margin-top: 1rem;
+      margin-bottom: 1.5rem;
+
+      textarea{
+        margin-bottom:0 !important;
+        
+
+      }
+    }
+
     .textarea-field{
-      margin-top: 1rem;
+      // margin-top: 1rem;
       label{
         line-height:1.3;
       }

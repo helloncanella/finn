@@ -53,7 +53,7 @@ class ProfilForm extends Component {
                     inputProps={{ placeholder: "Kunden Auflisten" }}
                   />{" "}
                 </div>
-                <div className="small-3 column">
+                <div className="small-4 large-3 column">
                   <small className="input-message">
                     Bei der Aflistung von Kunden Bittte ein Komma beachten.
                   </small>
@@ -63,18 +63,17 @@ class ProfilForm extends Component {
             <div className="small-12 column">
               <div className="row textarea-field">
                 <Textarea
-                maxChar={120}
-                ref={e => (this.fieldsets["about.shortdescription"] = e)}
-                slug="Kurzbeschreibung"
-                horizontalLayout
-              />
+                  maxChar={120}
+                  ref={e => (this.fieldsets["about.shortdescription"] = e)}
+                  slug="Kurzbeschreibung"
+                  horizontalLayout
+                />
               </div>
             </div>
-           
             <div className="small-12 column">
               <div className="row textarea-field">
                 <div className="small-2 column">
-                  <label htmlFor="ok">Werte</label>
+                  <label htmlFor="ok">Unternehmen beschreibung</label>
                 </div>
                 <div className="small-10 column">
                   <textarea />
@@ -84,7 +83,7 @@ class ProfilForm extends Component {
             <div className="small-12 column">
               <div className="row textarea-field">
                 <div className="small-2 column">
-                  <label htmlFor="ok">Unternehmen beschreibung</label>
+                  <label htmlFor="ok">Werte</label>
                 </div>
                 <div className="small-10 column">
                   <textarea />
