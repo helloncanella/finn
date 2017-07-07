@@ -36,7 +36,7 @@ const element = (inputNames, props, inputProps=[]) => {
 }
 
 describe("Form component", () => {
-  describe("getValue function", () => {
+  describe("getValues function", () => {
     it("return input values of children", () => {
       const value1 = "oi"
       const value2 = "ola"
@@ -48,7 +48,7 @@ describe("Form component", () => {
 
       let c = element(["lero.ok.vim", "lero.trim.piu"])
 
-      expect(c.instance().getValue()).toEqual({
+      expect(c.instance().getValues()).toEqual({
         lero: { ok: { vim: value1 }, trim: { piu: value2 } }
       })
     })

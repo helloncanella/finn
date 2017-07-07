@@ -5,8 +5,9 @@ import { stateToHTML } from "draft-js-export-html"
 import { forceHTTPS } from "./helpers"
 
 const Textarea = React.createClass({
+
   getInitialState() {
-    return { chars: this.props.value ? this.props.value.length : 0 }
+    return { chars: this.props.value ? this.props.value.length : 0, value:"" }
   },
   isCloseTo() {
     if (this.state.chars * 1.2 > this.props.maxChar) return true
@@ -15,6 +16,15 @@ const Textarea = React.createClass({
   count(e) {
     this.setState({ chars: e.target.value.length })
   },
+
+  value(){
+    return this.input.value
+  },
+
+  validate(){
+    this.props.validator && this.props.validator()
+  },
+
   render() {
     let charCountClasses = ["float-right char-count"]
     if (this.isCloseTo()) charCountClasses.push("red")
@@ -39,7 +49,6 @@ const Textarea = React.createClass({
     const label = (
       <label>
         {this.props.slug}
-        
         {!this.props.horizontalLayout && textarea}
       </label>
     )
@@ -104,6 +113,16 @@ const DraftTextarea = React.createClass({
 
     this.setState({ editorState, value, words })
   },
+
+  value(){
+    return this.state.value
+    // return 2
+  },
+
+  validate(){
+    this.props.validator && this.props.validator()
+  },
+
   render() {
     let charCountClasses = "float-right char-count "
     charCountClasses += this.isCloseTo() ? "red" : ""
@@ -130,26 +149,55 @@ const DraftTextarea = React.createClass({
       }
     }
 
-    return (
-      <div className="small-12 columns textarea">
-        <label>
-          {this.props.slug}
-          {this.props.maxWords &&
+    const editor = (
+      <div className="editorContainer">
+        <div className="editorWrapper">
+          <Editor
+            toolbar={toolbar}
+            editorState={editorState}
+            ref={e => (this.input = e)}
+            onEditorStateChange={this.onEditorStateChange}
+            toolbarClassName="home-toolbar"
+            wrapperClassName="home-wrapper"
+            editorClassName="home-editor"
+          />
+        </div>
+        {this.props.maxWords &&
+          <div className={charCountClasses}>
+            {this.state.words}/{this.props.maxWords}
+          </div>}
+      </div>
+    )
+
+    const label = (
+      <label>
+        {this.props.slug}
+        {/*{this.props.maxWords &&
             <div className={charCountClasses}>
               Wörter - {this.state.words}/{this.props.maxWords}
-            </div>}
-          <div className="editorWrapper">
-            <Editor
-              toolbar={toolbar}
-              editorState={editorState}
-              ref={e => (this.input = e)}
-              onEditorStateChange={this.onEditorStateChange}
-              toolbarClassName="home-toolbar"
-              wrapperClassName="home-wrapper"
-              editorClassName="home-editor"
-            />
+            </div>}*/}
+        {!this.props.horizontalLayout && editor}
+      </label>
+    )
+
+    if (this.props.horizontalLayout) {
+      return (
+        <div className="small-12 textarea column">
+          <div className="row">
+            <div className="small-3 large-2 column">
+              {label}
+            </div>
+            <div className="small-9 large-10 column">
+              {editor}
+            </div>
           </div>
-        </label>
+        </div>
+      )
+    }
+
+    return (
+      <div className="small-12 columns textarea">
+        {label}
       </div>
     )
   }

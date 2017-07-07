@@ -10,7 +10,7 @@ const wrapper = (props = {}, toMount) => {
 
 class Stub extends Component {
   validate() {
-    this.props.validate && this.props.validate()
+    this.props.validator && this.props.validator()
   }
 
   getValues() {
@@ -102,7 +102,7 @@ describe("Stepper", () => {
 
     it("once confirm button is pressed it validates the fields", () => {
       const validation = jest.fn(() => {})
-      const children = <Stub validate={validation} />
+      const children = <Stub validator={validation} />
 
       comp = wrapper({ children }, "mount")
       clickNext()
@@ -115,7 +115,7 @@ describe("Stepper", () => {
       Stub.prototype.getValues = jest.fn(() => values)
 
       const save = jest.fn()
-      const children = <Stub validate={() => {}} />
+      const children = <Stub validator={() => {}} />
 
       comp = wrapper({ children, save }, "mount")
 
@@ -158,13 +158,13 @@ describe("Stepper", () => {
 
     describe("if validation fails", () => {
       let error = "black"
-      let validate
+      let validator
 
       beforeEach(() => {
-        validate = jest.fn(() => {
+        validator = jest.fn(() => {
           throw new Error(error)
         })
-        comp = wrapper({ children: stubs(1, { validate }) }, "mount")
+        comp = wrapper({ children: stubs(1, { validator }) }, "mount")
         clickNext()
       })
 

@@ -1,11 +1,12 @@
 import React, { Component } from "react"
 import Input from "./Input"
 import { Textarea, DraftTextarea } from "./Textarea"
+import Form from './Form'
 
-class ProfilForm extends Component {
+class ProfilForm extends Form {
   constructor() {
     super()
-    this.fieldsets = []
+    this.inputs = []
   }
 
   render() {
@@ -25,7 +26,7 @@ class ProfilForm extends Component {
             <div className="small-6">
               <Input
                 maxChar={50}
-                ref={e => (this.fieldsets["about.name"] = e)}
+                ref={e => (this.inputs["about.name"] = e)}
                 slug="Name"
                 inputProps={{ placeholder: "Name Eigeben" }}
               />
@@ -33,7 +34,7 @@ class ProfilForm extends Component {
             <div className="small-6">
               <Input
                 type={"number"}
-                ref={e => (this.fieldsets["about.founded"] = e)}
+                ref={e => (this.inputs["about.founded"] = e)}
                 slug="Gründung"
                 inputProps={{
                   min: "1970",
@@ -48,9 +49,10 @@ class ProfilForm extends Component {
                 <div className="small-6">
                   <Input
                     maxChar={50}
-                    ref={e => (this.fieldsets["about.kunden"] = e)}
+                    ref={e => (this.inputs["about.kunden"] = e)}
                     slug="Kunden"
                     inputProps={{ placeholder: "Kunden Auflisten" }}
+                    validator={[()=>{}, ()=>{throw new Error('boteco')}]}
                   />{" "}
                 </div>
                 <div className="small-4 large-3 column">
@@ -64,7 +66,7 @@ class ProfilForm extends Component {
               <div className="row textarea-field">
                 <Textarea
                   maxChar={120}
-                  ref={e => (this.fieldsets["about.shortdescription"] = e)}
+                  ref={e => (this.inputs["about.shortdescription"] = e)}
                   slug="Kurzbeschreibung"
                   horizontalLayout
                 />
@@ -72,32 +74,32 @@ class ProfilForm extends Component {
             </div>
             <div className="small-12 column">
               <div className="row textarea-field">
-                <div className="small-2 column">
-                  <label htmlFor="ok">Unternehmen beschreibung</label>
-                </div>
-                <div className="small-10 column">
-                  <textarea />
-                </div>
+                <DraftTextarea
+                  maxWords={400}
+                  ref={e => (this.inputs["about.description"] = e)}
+                  slug="Unternehmens beschreibung"
+                  horizontalLayout
+                />
               </div>
             </div>
             <div className="small-12 column">
               <div className="row textarea-field">
-                <div className="small-2 column">
-                  <label htmlFor="ok">Werte</label>
-                </div>
-                <div className="small-10 column">
-                  <textarea />
-                </div>
+                <DraftTextarea
+                  ref={e => (this.inputs["about.values"] = e)}
+                  maxWords={200}
+                  slug="Werte"
+                  horizontalLayout
+                />
               </div>
             </div>
             <div className="small-12 column">
               <div className="row textarea-field">
-                <div className="small-2 column">
-                  <label htmlFor="ok">Kundenzitat</label>
-                </div>
-                <div className="small-10 column">
-                  <textarea />
-                </div>
+                <Textarea
+                  maxChar={200}
+                  ref={e => (this.inputs["about.testimonial.text"] = e)}
+                  slug="Kundenzitat"
+                  horizontalLayout
+                />
               </div>
             </div>
           </div>

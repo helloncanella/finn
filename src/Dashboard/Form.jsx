@@ -7,7 +7,7 @@ class Form extends Component {
     this.inputs = []
   }
 
-  getValue() {
+  getValues() {
     const inputValue = {}
 
     Object.keys(this.inputs).forEach(name => {

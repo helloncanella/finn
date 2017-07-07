@@ -275,7 +275,7 @@
 // //     let attributes = ToolData[index].eigenschaften
 // //     let header = ToolData[index][head || "slug"]
 // //     obj[header] = []
-// //     Object.keys(attributes).map(attribute => {
+//     Object.keys(attributes).map(attribute => {
 // //       if (toolfinder[index].includes(attribute)) {
 // //         obj[header].push(ToolData[index].eigenschaften[attribute].slug)
 // //       }
