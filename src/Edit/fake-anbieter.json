@@ -1,0 +1,74 @@
+{ 
+    "_id" : "y9M3kbPrvRNBuyLiN", 
+    "profile" : {
+        "contact" : {
+            "image" : {
+                "id" : "DxQ9YqWmLwqHfHtHX"
+            }, 
+            "name" : "Dr. Ruth Böck", 
+            "title" : "Geschäftsführerin", 
+            "telefon" : "0221/7166767-0", 
+            "email" : "info@upo.de", 
+            "website" : "http://www.upo.de", 
+            "social" : {
+
+            }, 
+            "address" : "Eupener Str. 124, 50933, Köln, Deutschland", 
+            "latlong" : {
+                "lat" : 50.9433039, 
+                "long" : 6.890652199999977
+            }
+        }, 
+        "services" : {
+            "list" : [
+                "pt"
+            ], 
+            "details" : {
+                "pt" : "<p>Bitte ergänzen Sie die Angaben.</p>"
+            }
+        }, 
+        "about" : {
+            "images" : [
+                {
+                    "id" : "fSWoGaS2MS8vKEiz3"
+                }
+            ], 
+            "testimonial" : {
+                "text" : "Bitte ergänzen Sie die Angaben.", 
+                "name" : "Bitte ergänzen Sie die Angaben."
+            }, 
+            "logo" : {
+                "id" : "5KaLd47gm7GaGwinM"
+            }, 
+            "name" : "Dr. Ruth Böck Unternehmensberatung", 
+            "founded" : "0000", 
+            "shortdescription" : "Dr. Ruth Böck Unternehmensberatung für\nPersonal- und Organisationsmanagement", 
+            "description" : "<p>Bitte ergänzen Sie die Angaben.</p>", 
+            "values" : "<p>Bitte ergänzen Sie die Angaben.</p>"
+        }
+    }, 
+    "meta" : {
+        "role" : "Anbieter", 
+        "published" : true, 
+        "createdAt" : 1494422868520.0, 
+        "lastUpdate" : 1494422868520.0, 
+        "approved" : true, 
+        "subscribed" : false, 
+        "payment" : {
+
+        }, 
+        "name" : "Dr. Ruth Böck", 
+        "ansprache" : "Liebe Frau Dr. Böck"
+    }, 
+    "emails" : [
+
+    ], 
+    "services" : {
+        "password" : {
+
+        }, 
+        "resume" : {
+
+        }
+    }
+}

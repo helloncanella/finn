@@ -36,10 +36,11 @@ class Input extends React.Component {
     try {
       validators.length && validators.forEach(validator => validator())
     } catch (e) {
-      this.setError(e.message || e.reason)
-      throw new Error(e.message || e.reason)
-
+      const error = e.message || e.reason
+      this.setError(error)
+      throw new Error(error)
     }
+
   }
 
   render() {

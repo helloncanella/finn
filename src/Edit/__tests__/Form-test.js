@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import { shallow, mount } from "enzyme"
-import Form from "../Form"
+import Form from "../components/Form"
 import _ from "lodash"
-
+ 
 class Input extends Component {
   render() {
     return null
@@ -64,6 +64,8 @@ describe("Form component", () => {
 
       mocks.forEach(mock => expect(mock).toBeCalled())
     })
+
+   
 
     it("call passed validator with each input value", () => {
       const mock = jest.fn()

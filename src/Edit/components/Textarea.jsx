@@ -1,29 +1,28 @@
-import React, { PropTypes } from "react"
+import React, { PropTypes, Component } from "react"
 import Draft from "draft-js"
 import { Editor } from "react-draft-wysiwyg"
 import { stateToHTML } from "draft-js-export-html"
 import { forceHTTPS } from "./helpers"
+import Input from "./Input.jsx"
 
-const Textarea = React.createClass({
+class Textarea extends Input {
+  constructor(props) {
+    super()
+    this.state = {
+      chars: props.value ? props.value.length : 0,
+      value: "",
+      error: ""
+    }
+    this.count = this.count.bind(this)
+  }
 
-  getInitialState() {
-    return { chars: this.props.value ? this.props.value.length : 0, value:"" }
-  },
   isCloseTo() {
     if (this.state.chars * 1.2 > this.props.maxChar) return true
     else return false
-  },
+  }
   count(e) {
     this.setState({ chars: e.target.value.length })
-  },
-
-  value(){
-    return this.input.value
-  },
-
-  validate(){
-    this.props.validator && this.props.validator()
-  },
+  }
 
   render() {
     let charCountClasses = ["float-right char-count"]
@@ -42,6 +41,12 @@ const Textarea = React.createClass({
         />
         <div className={charCountClasses.join(" ")}>
           {this.state.chars}/{this.props.maxChar}
+        </div>
+        <div
+          className="error"
+          style={{ float: 'left', visibility: this.state.error ? "visible" : "hidden" }}
+        >
+          {this.state.error || "error"}
         </div>
       </div>
     )
@@ -74,7 +79,7 @@ const Textarea = React.createClass({
       </div>
     )
   }
-})
+}
 
 const DraftTextarea = React.createClass({
   getInitialState() {
@@ -114,12 +119,11 @@ const DraftTextarea = React.createClass({
     this.setState({ editorState, value, words })
   },
 
-  value(){
+  value() {
     return this.state.value
-    // return 2
   },
 
-  validate(){
+  validate() {
     this.props.validator && this.props.validator()
   },
 

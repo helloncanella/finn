@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-class Dashboard extends Component {
+class Stepper extends Component {
   constructor() {
     super()
     this.state = {
@@ -25,6 +25,10 @@ class Dashboard extends Component {
       this.setState({ stepIndex: --this.state.stepIndex })
   }
 
+  cleanErrors() {
+    this.setState({ error: "" })
+  }
+
   onAdvance() {
     const step = this.steps && this.steps[this.state.stepIndex]
 
@@ -39,6 +43,7 @@ class Dashboard extends Component {
 
       if (step.getValues && this.props.save) {
         this.props.save(step.getValues())
+        this.cleanErrors()
       }
 
       if (!this.isLastStep()) this.next()
@@ -98,8 +103,8 @@ class Dashboard extends Component {
     )
   }
 
-  changeStep(stepIndex){
-    this.setState({stepIndex})
+  changeStep(stepIndex) {
+    this.setState({ stepIndex })
   }
 
   stepsDescription() {
@@ -108,11 +113,15 @@ class Dashboard extends Component {
     const steps = React.Children.map(children, (child, index) => {
       const name = child.props.name
       const destakClass = index === this.state.stepIndex ? "current" : ""
-      const pastClass = index<this.state.stepIndex ? "past" : ""
-      const changeStep = ()=>this.changeStep(index)
+      const pastClass = index < this.state.stepIndex ? "past" : ""
+      const changeStep = () => this.changeStep(index)
 
       return (
-        <div className={`step ${pastClass} ${destakClass}`} key={`step-${index}`} onClick={changeStep}>
+        <div
+          className={`step ${pastClass} ${destakClass}`}
+          key={`step-${index}`}
+          onClick={changeStep}
+        >
           <div className="bullet" />
           <h6 className="description">
             {name}
@@ -131,9 +140,9 @@ class Dashboard extends Component {
   top() {
     return (
       <div className="top row">
-        <div className="profile small-3 column">
-          <h3 className="title">Profil Ansehen</h3>
-          <h4>überblick über eigene Daten</h4>
+        <div className="profile-info small-3 column">
+          <h2 className="title">Profil Ansehen</h2>
+          <h3>überblick über eigene Daten</h3>
           <img
             src="https://www.w3schools.com/w3css/img_avatar3.png"
             alt="avatar"
@@ -141,7 +150,7 @@ class Dashboard extends Component {
           />
         </div>
         <div className="all-steps small-9 column">
-          <h3 className="title">Editieren</h3>
+          <h2 className="title">Editieren</h2>
           <div className="sequences">
             <div className="line" />
             {this.stepsDescription()}
@@ -153,21 +162,13 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div className="layout">
-        <aside />
-        <main>
-          <header />
-          <div className="dashboard">
-            <div className="stepper">
-              {this.top()}
-              {this.stepsComponents()}
-              {this.controls()}
-            </div>
-          </div>
-        </main>
+      <div className="stepper">
+        {this.top()}
+        {this.stepsComponents()}
+        {this.controls()}
       </div>
     )
   }
 }
 
-export default Dashboard
+export default Stepper

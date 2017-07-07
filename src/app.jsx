@@ -1,20 +1,15 @@
 import React, { Component } from "react"
 import HomePage from "./HomePage/Index.jsx"
-import Stepper from "./Dashboard/Stepper.jsx"
-import ProfilForm from './Dashboard/ProfilForm.jsx'
+import Edit from "./Edit/Edit.jsx"
 
-import "./Dashboard/style.scss"
-import "./Dashboard/editor.scss"
+import "./Edit/_edit.scss"
+import "./OldEdit/editor.scss"
+
+import anbieter from "./OldEdit/fake-anbieter.json"
 
 export default class App extends React.Component {
   render() {
-    return (
-      <Stepper save={oi=>console.log(oi)}>
-        <ProfilForm name="Hello" />
-        <ProfilForm name="Trello" />
-        <ProfilForm name="Bill" />
-      </Stepper>
-    )
+    return <Edit user={anbieter} saveUser={oi=>console.log(oi)}/>
   }
 }
 

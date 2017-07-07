@@ -19,6 +19,7 @@ class Form extends Component {
 
   validate() {
     let { validators = [] } = this.props
+    let caughtError
 
     !Array.isArray(validators) && (validators = [validators])
 
@@ -30,8 +31,14 @@ class Form extends Component {
         validators.forEach(validator => validator(value))
       }
 
-      input.validate && input.validate()
+      try{
+        input.validate && input.validate()
+      }catch(e){
+        caughtError = true
+      }
     })
+
+    if(caughtError) throw new Error('one or more fields are invalid')
   }
 }
 

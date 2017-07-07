@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { shallow, mount } from "enzyme"
-import Dashboard from "../Stepper"
+import Dashboard from "../components/Stepper"
 
 const wrapper = (props = {}, toMount) => {
   props.children = props.children || <div />
@@ -95,6 +95,8 @@ describe("Stepper", () => {
       expect(state().stepIndex).toEqual(4)
     })
 
+    
+
     it("the back button doesn't appear in the first step", () => {
       setState({ stepIndex: 0 })
       expect(comp.find(".back").length).toEqual(0)
@@ -151,9 +153,9 @@ describe("Stepper", () => {
       expect(display()).toBe("none")
     })
 
-    describe.skip("when save", () => {
-      it("on start, show loading spinner ", () => {})
-      it("on end, hide loading spinner", () => {})
+    describe("when save", () => {
+      it.skip("on start, show loading spinner ", () => {})
+      it.skip("on end, hide loading spinner", () => {})
     })
 
     describe("if validation fails", () => {
