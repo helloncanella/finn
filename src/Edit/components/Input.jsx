@@ -8,6 +8,8 @@ class Input extends React.Component {
     }
   }
 
+  //add verification if the input is empty
+
   value() {
     return this.input.value
   }
