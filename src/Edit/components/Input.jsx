@@ -20,12 +20,18 @@ class Input extends React.Component {
   }
 
   markBorder() {
-    this.input.style.border = "1px solid red"
+    this.input.style.border = "1px solid #ea5153"
   }
 
   cleanError() {
     this.setState({error: ''})
     this.input.style = null
+  }
+
+  isEmpty=()=>{
+    if(this.props.required && !this.input.value){
+      throw new Error("required")
+    }
   }
 
   validate() {
@@ -34,6 +40,8 @@ class Input extends React.Component {
     let { validator: validators = [] } = this.props
 
     !Array.isArray(validators) && (validators = [validators])
+
+    validators = [].concat(this.isEmpty, ...validators)
 
     try {
       validators.length && validators.forEach(validator => validator())

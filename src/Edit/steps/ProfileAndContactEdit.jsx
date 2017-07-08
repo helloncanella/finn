@@ -31,6 +31,7 @@ class ProfileAndContactEdit extends Form {
                 slug="Name"
                 value={_.get(userData, "profile.about.name")}
                 inputProps={{ placeholder: "Name Eigeben" }}
+                required
               />
             </div>
             <div className="small-6">
@@ -45,6 +46,7 @@ class ProfileAndContactEdit extends Form {
                   step: "1",
                   placeholder: "Datum Eingeben TT.MM.JJ"
                 }}
+                required
               />
             </div>
             <div className="small-12 column">
@@ -73,6 +75,7 @@ class ProfileAndContactEdit extends Form {
                   slug="Kurzbeschreibung"
                   value={_.get(userData, "profile.about.shortdescription")}
                   horizontalLayout
+                  required
                 />
               </div>
             </div>
@@ -106,6 +109,7 @@ class ProfileAndContactEdit extends Form {
                   slug="Kundenzitat"
                   value={_.get(userData, "profile.about.testimonial.text")}
                   horizontalLayout
+                  required
                 />
               </div>
             </div>
