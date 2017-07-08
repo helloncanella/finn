@@ -107,16 +107,20 @@
 
     .children {
       .form {
-        background-color: white;
-
-        &:not(:last-child) {
-          margin-bottom: 1.5rem;
+            padding-bottom:0;
+        section {
+          background-color: white;
+            padding: 1rem;
+          &:not(:first-child) {
+            margin-top: 1.5rem;
+          }
         }
       }
     }
 
     .controls {
       padding: 0.8rem;
+      margin: 1rem;
       background: white;
       margin-top: 1px;
 

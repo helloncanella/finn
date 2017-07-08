@@ -20,7 +20,7 @@ class ProfileAndContactEdit extends Form {
     }
 
     return (
-      <div className="profile">
+      <section className="profile">
         <Header {...headerProps} />
         <div className="inputs">
           <div className="row">
@@ -111,18 +111,18 @@ class ProfileAndContactEdit extends Form {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     )
   }
 
   contact(userData) {
     const headerProps = {
-      title: "Profil Bearbeiten",
+      title: "Kontakt Bearbeiten",
       description: ""
     }
 
     return (
-      <div className="profile">
+      <section className="contact">
         <Header {...headerProps} />
         <div className="inputs">
           <div className="row">
@@ -139,58 +139,37 @@ class ProfileAndContactEdit extends Form {
               <Input
                 maxChar={50}
                 ref={e => (this.inputs["profile.contact.title"] = e)}
-                slug="Name"
+                slug="Rolle im Unternehmen"
                 value={_.get(userData, "profile.contact.title")}
-                inputProps={{ placeholder: "Name Eigeben" }}
+                inputProps={{ placeholder: "Rolle im Unternehmen" }}
               />
             </div>
-            <div className="small-12 column">
-              <div className="row">
-                <div className="small-6">
-                  <Input
-                    maxChar={50}
-                    ref={e => (this.inputs["profile.contact.telefon"] = e)}
-                    slug="Name"
-                    value={_.get(userData, "profile.contact.telefon")}
-                    inputProps={{ placeholder: "Name Eigeben" }}
-                  />
-                </div>
-                <div className="small-4 large-3 column">
-                  <small className="input-message">
-                    Bei der Aflistung von Kunden Bittte ein Komma beachten.
-                  </small>
-                </div>
-              </div>
+            <div className="small-6">
+              <Input
+                maxChar={50}
+                ref={e => (this.inputs["profile.contact.telefon"] = e)}
+                slug="Telefonnummer"
+                value={_.get(userData, "profile.contact.telefon")}
+                inputProps={{ placeholder: "Kunden Auflisten" }}
+              />
             </div>
-            <div className="small-12 column">
-              <div className="row textarea-field">
-                <Input
-                  ref={e => (this.inputs["profile.contact.email"] = e)}
-                  slug="Name"
-                  value={_.get(userData, "profile.contact.email")}
-                  inputProps={{ placeholder: "Name Eigeben" }}
-                  validator={}
-                />
-              </div>
+            <div className="small-6">
+              <Input
+                ref={e => (this.inputs["profile.contact.email"] = e)}
+                slug="Emailadresse"
+                value={_.get(userData, "profile.contact.email")}
+                inputProps={{ placeholder: "Emailadresse" }}
+                //validator={}
+              />
             </div>
-            <div className="small-12 column">
-              <div className="row textarea-field">
-                <Input
-                  maxChar={120}
-                  ref={e => (this.inputs["profile.contact.website"] = e)}
-                  slug="Name"
-                  value={_.get(userData, "profile.contact.website")}
-                  inputProps={{ placeholder: "Name Eigeben" }}
-                />
-              </div>
-            </div>
+
             <div className="small-12 column">
               <div className="row textarea-field">
                 <Input
                   ref={e => (this.inputs["profile.contact.website"] = e)}
-                  slug="Name"
+                  slug="Website"
                   value={_.get(userData, "profile.contact.website")}
-                  inputProps={{ placeholder: "Name Eigeben" }}
+                  inputProps={{ placeholder: "Vollständige Domain: www. " }}
                 />
               </div>
             </div>
@@ -199,15 +178,15 @@ class ProfileAndContactEdit extends Form {
                 <Input
                   ref={e => (this.inputs["profile.contact.address"] = e)}
                   slug="Anschrift"
-                  value={_.get(userData, "profile.contact.website")}
-                  inputProps={{ placeholder: "Name Eigeben" }}
+                  value={_.get(userData, "profile.contact.address")}
+                  inputProps={{ placeholder: "Kunden Auflisten" }}
                 />
                 {/**TODO:add map**/}
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     )
   }
 
