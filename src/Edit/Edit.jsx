@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import Stepper from "./components/Stepper.jsx"
 import ProfileAndContactEdit from './steps/ProfileAndContactEdit.jsx'
 import Images from './steps/Images.jsx'
+import Social from './steps/Social.jsx'
+
+
 
 export default class EditPage extends Component {
   render() {
@@ -13,7 +16,7 @@ export default class EditPage extends Component {
         <Stepper save={save}>
           <ProfileAndContactEdit name="Profil/Kontakt" {...commonProps}/>
           <Images name="Bilder" {...commonProps}/>
-          <ProfileAndContactEdit name="Socialmedia" {...commonProps}/>
+          <Social name="Socialmedia" {...commonProps}/>
           <ProfileAndContactEdit name="Service" {...commonProps}/>
           <ProfileAndContactEdit name="Zip./ Anhang" {...commonProps}/>
         </Stepper>

@@ -34,12 +34,16 @@ class Images extends Form {
       description: ""
     }
 
+
+
     return (
       <section className="company-images">
         <Header {...headerProps} />
         <div className="inputs">
-          
+          <ImageInput ref={e=>this.inputs["logo"]=e}/>
+          <ImageInput ref={e=>this.inputs["logo"]=e}/>
         </div>
+        <h4 className="add-more-images"onClick={()=>alert('more images')}>Mehr Bilder Hinzufügen</h4>
       </section>
     )
   }
@@ -51,6 +55,7 @@ class Images extends Form {
       <div className="form" style={this.props.style}>
         {this.logo(userData)}
         {this.companyImages(userData)}
+        
       </div>
     )
   }

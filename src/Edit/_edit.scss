@@ -107,12 +107,19 @@
 
     .children {
       .form {
-            padding-bottom:0;
+        padding-bottom: 0;
         section {
           background-color: white;
-            padding: 1rem;
+          padding: 1rem;
           &:not(:first-child) {
             margin-top: 1.5rem;
+          }
+
+          &.company-images {
+            .add-more-images {
+              margin-top:1.5rem;
+              text-align: center;
+            }
           }
         }
       }
@@ -165,7 +172,7 @@
 
   .form {
     padding: 1rem;
-    width:100%;
+    width: 100%;
 
     .row {
       margin-top: 0.9rem;
@@ -181,7 +188,8 @@
       margin-bottom: $m;
     }
 
-    .inputs, .input {
+    .inputs,
+    .input {
       input,
       textarea {
         width: 100%;
@@ -217,38 +225,38 @@
     }
   }
 
-  .image-input{
-    // $s: 150px;
-    // width:$s;
-    // height: $s;
-    // background: 
-
-    .drag-and-drop{
-      padding: 60px;
-      text-align: center;
-      background: #E1E1E1;
-
-      small{
-        display: block;
-      }
-
+  .image-input {
+    &:not(:first-child) {
+      margin-top: 2.8rem;
     }
 
-    .info{
-      .black{
+    .drag-and-drop {
+      padding: 60px;
+      text-align: center;
+      background: #e1e1e1;
+
+      small {
+        display: block;
+      }
+    }
+
+    .info {
+      .black {
         color: black;
       }
 
-      p{
+      p {
         font-size: 1em;
         color: gray;
-        &:first-child{
+        &:first-child {
           margin-bottom: 0.8rem;
         }
       }
 
-      .images{
-        .image{
+      .images {
+        margin-top: 1rem;
+
+        .image {
           $s: 50px;
           width: $s;
           height: $s;
@@ -257,6 +265,40 @@
         }
       }
     }
+  }
 
+  .social-input{
+    text-align: center;
+
+
+    margin-top:1.5rem;
+
+    &:last-child{
+      margin-bottom: 2rem; 
+    }
+
+    input{
+      height:30px;
+      margin-top:3px;
+      // margin-left: 10px;
+      font-size: 0.9em !important;
+      padding-left: 5px;
+    }
+
+    .company-name{
+      text-align: left;
+      font-size: 0.7em;
+      font-weight: bold;
+      text-transform: capitalize;
+      margin-bottom: 5px;
+    }
+
+    .logo{      
+      background: #D9D9D9;
+      text-align: center;
+      padding: 15px;
+      display:inline-table;
+      border-radius: 50%;
+    }
   }
 }

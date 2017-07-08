@@ -1,6 +1,10 @@
 import React, { Component } from "react"
 
 class ImageInput extends Component {
+  value(){
+    
+  }
+
   render() {
     return (
       <div className="image-input">
