@@ -165,6 +165,7 @@
 
   .form {
     padding: 1rem;
+    width:100%;
 
     .row {
       margin-top: 0.9rem;
@@ -180,7 +181,7 @@
       margin-bottom: $m;
     }
 
-    .inputs {
+    .inputs, .input {
       input,
       textarea {
         width: 100%;
@@ -214,5 +215,48 @@
         }
       }
     }
+  }
+
+  .image-input{
+    // $s: 150px;
+    // width:$s;
+    // height: $s;
+    // background: 
+
+    .drag-and-drop{
+      padding: 60px;
+      text-align: center;
+      background: #E1E1E1;
+
+      small{
+        display: block;
+      }
+
+    }
+
+    .info{
+      .black{
+        color: black;
+      }
+
+      p{
+        font-size: 1em;
+        color: gray;
+        &:first-child{
+          margin-bottom: 0.8rem;
+        }
+      }
+
+      .images{
+        .image{
+          $s: 50px;
+          width: $s;
+          height: $s;
+          border-radius: 50%;
+          background: gray;
+        }
+      }
+    }
+
   }
 }
