@@ -4,17 +4,32 @@ import { Textarea, DraftTextarea } from "./../components/Textarea"
 import Form from "../components/Form"
 import Header from "../components/SectionHeader"
 import _ from "lodash"
-import SocialInput from '../components/SocialInput'
+import SocialInput from "../components/SocialInput"
 
 class Social extends Form {
   constructor() {
     super()
     this.inputs = []
-  }  
-
-  getRef=(company)=>{
-    return e=>this.inputs[`profile.contact.social.${company}`]=e
   }
+
+  getRef = company => {
+    return e => (this.inputs[`profile.contact.social.${company}`] = e)
+  }
+
+  getDefaultValue = company => {
+    // debugger
+    return _.get(this.props.userData, `profile.contact.social.${company}`)
+  }
+
+  socialInput = (company, index)=>{
+    return <SocialInput
+        company={company}
+        key={`company-${index}`}
+        ref={this.getRef(company)}
+        value={this.getDefaultValue(company)}
+      />
+  }
+
 
   render() {
     const { userData } = this.props
@@ -29,10 +44,7 @@ class Social extends Form {
         <section className="social">
           <Header {...headerProps} />
           <div className="inputs">
-            <SocialInput company="facebook" ref={this.getRef("facebook")}/>
-            <SocialInput company="twitter" ref={this.getRef("twitter")} />
-            <SocialInput company="linkedin" ref={this.getRef("linkedin")}/>
-            <SocialInput company="xing" ref={this.getRef("xing")}/>
+            {['facebook', 'twitter', 'linkedin', 'xing'].map(this.socialInput)}
           </div>
         </section>
       </div>

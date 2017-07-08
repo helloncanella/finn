@@ -28,7 +28,7 @@ class SocialInput extends Input {
             </div>
           </div>
           <div className="small-11 column">
-            <input ref={e=>this.input=e} placeholder="Vollständige adresse eingeben www."/>
+            <input ref={e=>this.input=e} defaultValue={this.props.value} placeholder="Vollständige adresse eingeben www."/>
           </div>
         </div>
       </div>
