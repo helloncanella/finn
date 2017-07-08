@@ -56,6 +56,8 @@ class Stepper extends Component {
 
   getChildren() {
     return React.Children.map(this.props.children, (child, index) => {
+      if(!child) return null
+
       const isNotCurrentStep = index !== this.state.stepIndex
 
       const style = { display: isNotCurrentStep ? "none" : "block" }
@@ -85,11 +87,13 @@ class Stepper extends Component {
 
     return (
       <div className="controls row">
-        <h6 className="error">
-          {this.state.error}
-        </h6>
-        {back}
-        {next}
+        <div className="content">
+          <h6 className="error">
+            {this.state.error}
+          </h6>
+          {back}
+          {next}
+        </div>
       </div>
     )
   }
@@ -111,6 +115,7 @@ class Stepper extends Component {
     const { children } = this.props
 
     const steps = React.Children.map(children, (child, index) => {
+      if(!child) return null
       const name = child.props.name
       const destakClass = index === this.state.stepIndex ? "current" : ""
       const pastClass = index < this.state.stepIndex ? "past" : ""

@@ -1,0 +1,31 @@
+{
+  "pt": {
+    "slug": "Personaltests",
+    "shortcode": "PT",
+    "text": "Dieser Bereich umfasst Personaltest, Online-Assessments und Potenzialanalysen zur Messung von berufsspezifischen Kompetenzen und Verhalten.",
+    "hint": "Personaltests: Instrumente zur Erfassung von Persönlichkeit, Fähigkeiten, Leistung und Verhalten.",
+    "name": "pt"
+  },
+
+  "mb": {
+    "slug": "Mitarbeiterbefragung",
+    "shortcode": "MB",
+    "text": "Via Fragebogen oder Umfragen in Unternehmen erhält man quantitative Daten zu Meinungs- und Stimmungsbildern  .",
+    "hint": "Mitarbeiterbefragungen: Erfassung von Stimmungs- und Meinungsbildern in Unternehmen.",
+    "name": "mb"
+  },
+  "pg": {
+    "slug": "Gefährdungsbeurteilung",
+    "shortcode": "GB",
+    "text": "Mit diesen Fragebögen wird die psychische und physische Belastung erfasst und beurteilt, um Arbeitsbedingungen zu ermitteln  .",
+    "hint": "Gefährdungsbeurteilung: Fragebögen für die psychische und physische Belastung am Arbeitsplatz.",
+    "name": "pg"
+  },
+  "fb": {
+    "slug": "360° Feedback",
+    "shortcode": "360",
+    "text": "Diese Verfahren nutzt man zur Einschätzung der Kompetenzen von Fach- und Führungskräften aus unterschiedlichen Perspektiven.   ",
+    "hint": "360-Feedback-Systeme: Einschätzung der Kompetenzen von Fach- und Führungskräften aus unterschiedlichen Perspektiven.",
+    "name": "fb"
+  }
+}

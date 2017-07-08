@@ -1,4 +1,6 @@
 .profile-edit {
+  width: 100%;
+  overflow-x: hidden;
   .stepper {
     padding: 10px;
     color: #838793;
@@ -82,17 +84,18 @@
 
               &.past {
                 .bullet {
-                  transform: scale(1.1);
+                  // transform: scale(1.1);
                 }
 
                 .description {
+                  font-weight: bold;
                   color: lightgray;
                 }
               }
 
               &.current {
                 .bullet {
-                  transform: scale(1.3);
+                  transform: scale(1.4);
                 }
 
                 .description {
@@ -117,7 +120,7 @@
 
           &.company-images {
             .add-more-images {
-              margin-top:1.5rem;
+              margin-top: 1.5rem;
               text-align: center;
             }
           }
@@ -127,35 +130,42 @@
 
     .controls {
       padding: 0.8rem;
-      margin: 1rem;
-      background: white;
+      padding-top: 0;
+      // margin: 1rem;
       margin-top: 1px;
 
-      &.row {
-        display: inherit;
-      }
+      .content {
+        width: 99.3%;
+        margin: 0 auto;
+        background: white;
+        padding: 1rem;
 
-      .button {
-        border-radius: 6px;
-        margin: 0;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-
-        &.back {
-          background-color: #bac5db;
+        &.row {
+          display: inherit;
         }
 
-        &.next {
-          background-color: $green;
-          float: right;
-        }
-      }
+        .button {
+          border-radius: 6px;
+          margin: 0;
+          font-size: 1rem;
+          font-weight: bold;
+          cursor: pointer;
 
-      &:after {
-        display: block;
-        clear: both;
-        content: '';
+          &.back {
+            background-color: #bac5db;
+          }
+
+          &.next {
+            background-color: $green;
+            float: right;
+          }
+        }
+
+        &:after {
+          display: block;
+          clear: both;
+          content: '';
+        }
       }
     }
 
@@ -267,25 +277,24 @@
     }
   }
 
-  .social-input{
+  .social-input {
     text-align: center;
 
+    margin-top: 1.5rem;
 
-    margin-top:1.5rem;
-
-    &:last-child{
-      margin-bottom: 2rem; 
+    &:last-child {
+      margin-bottom: 2rem;
     }
 
-    input{
-      height:30px;
-      margin-top:3px;
+    input {
+      height: 30px;
+      margin-top: 3px;
       // margin-left: 10px;
       font-size: 0.9em !important;
       padding-left: 5px;
     }
 
-    .company-name{
+    .company-name {
       text-align: left;
       font-size: 0.7em;
       font-weight: bold;
@@ -293,12 +302,50 @@
       margin-bottom: 5px;
     }
 
-    .logo{      
-      background: #D9D9D9;
+    .logo {
+      background: #d9d9d9;
       text-align: center;
       padding: 15px;
-      display:inline-table;
+      display: inline-table;
       border-radius: 50%;
+    }
+  }
+
+  .services-input {
+    margin-bottom: 4.5rem;
+    .service {
+      float: left;
+      position: relative;
+      cursor: pointer;
+
+      background: #cdd5e4;
+      margin-right: 2.5rem;
+      color: #f1f3f6;
+      border-radius: 5px;
+
+      $w: 50px;
+      width: $w;
+      height: $w;
+
+      .shortcode {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: table;
+      }
+
+      &.selected {
+        background: #52bd8f;
+        color: white;
+      }
+    }
+
+    &::after {
+      display: block;
+      content: '';
+      clear: both;
     }
   }
 }

@@ -6,11 +6,16 @@ import "./Edit/_edit.scss"
 import "./OldEdit/editor.scss"
 
 import anbieter from "./Edit/fake-anbieter.json"
+import servicesList from "./Edit/services-list.json"
 
 export default class App extends React.Component {
   render() {
-    return <Edit user={anbieter} saveUser={oi=>console.log(oi)}/>
+    return (
+      <Edit
+        user={anbieter}
+        saveUser={oi => console.log(oi)}
+        anbieterServices={servicesList}
+      />
+    )
   }
 }
-
-
