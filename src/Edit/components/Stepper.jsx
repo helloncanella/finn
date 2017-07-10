@@ -5,7 +5,6 @@ class Stepper extends Component {
     super()
     this.state = {
       stepIndex: 0,
-      error: ""
     }
 
     this.next = this.next.bind(this)
@@ -25,9 +24,10 @@ class Stepper extends Component {
       this.setState({ stepIndex: --this.state.stepIndex })
   }
 
-  cleanErrors() {
-    this.setState({ error: "" })
+  alertError(message){
+    this.props.onError && this.props.onError(message)
   }
+
 
   onAdvance() {
     const step = this.steps && this.steps[this.state.stepIndex]
@@ -36,17 +36,22 @@ class Stepper extends Component {
       try {
         step.validate && step.validate()
       } catch (e) {
-        this.setState({ error: e.message })
-        console.error(e.message)
+        const error = e.message || e.reason
+        this.alertError(error)
+        console.error(error)
         return
       }
 
       if (step.getValues && this.props.save) {
-        this.props.save(step.getValues())
-        this.cleanErrors()
+        this.props.save(step.getValues(), err => {
+          if(err) this.alertError(err.reason)
+        })
+        
       }
 
-      if (!this.isLastStep()) this.next()
+      if (!this.isLastStep()) {
+        this.next()
+      }
     }
   }
 
@@ -56,7 +61,7 @@ class Stepper extends Component {
 
   getChildren() {
     return React.Children.map(this.props.children, (child, index) => {
-      if(!child) return null
+      if (!child) return null
 
       const isNotCurrentStep = index !== this.state.stepIndex
 
@@ -115,7 +120,7 @@ class Stepper extends Component {
     const { children } = this.props
 
     const steps = React.Children.map(children, (child, index) => {
-      if(!child) return null
+      if (!child) return null
       const name = child.props.name
       const destakClass = index === this.state.stepIndex ? "current" : ""
       const pastClass = index < this.state.stepIndex ? "past" : ""
@@ -147,7 +152,7 @@ class Stepper extends Component {
       <div className="top row">
         <div className="profile-info small-3 column">
           <h2 className="title">Profil Ansehen</h2>
-          <h3>überblick über eigene Daten</h3>
+          <h3 className="description">überblick über eigene Daten</h3>
           <img
             src="https://www.w3schools.com/w3css/img_avatar3.png"
             alt="avatar"

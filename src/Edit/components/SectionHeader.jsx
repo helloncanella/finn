@@ -5,10 +5,10 @@ class SectionHeader extends Component {
     const { title, description } = this.props
 
     return (
-      <div className="header">
-        <h3 className="title">
+      <div className="section-header">
+        <h2 className="title">
           {title}
-        </h3>
+        </h2>
         <small className="description">
           {description}
         </small>

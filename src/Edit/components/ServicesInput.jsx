@@ -5,7 +5,7 @@ class ServicesInput extends Component {
   constructor(props){
     super()
     this.state = {
-      selectedServices: props.value
+      selectedServices: props.value || []
     }
   }
 

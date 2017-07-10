@@ -1,18 +1,22 @@
 import React, { Component } from "react"
-import Input from './Input.jsx'
+import Input from "./Input.jsx"
+// import FontAwesome from 'react-fontawesome'
+//
 
+import scriptLoader from "react-async-script-loader"
+const fontawesome = "https://use.fontawesome.com/037d1e9b1a.js"
 
 class SocialInput extends Input {
+  logo(companyName) {
 
-  logoClass(companyName){
     const logos = {
-      "twitter": "fi-social-twitter",
-      "facebook": "fi-social-facebook",
-      "linkedin": "fi-social-linkedin",
-      "xing": "fi-finn-i-dont-know"
+      twitter: "fa fa-twitter",
+      facebook: "fa fa-facebook",
+      linkedin: "fa fa-linkedin",
+      xing: "fa fa-xing"
     }
 
-    return logos[companyName]
+    return <i className={logos[companyName]} />
   }
 
   render() {
@@ -21,14 +25,20 @@ class SocialInput extends Input {
     return (
       <div className="social-input">
         <div className="row">
-          <small className="small-12 column company-name">{companyName}</small>
-          <div className="small-1 column">
+          <small className="small-12 column company-name">
+            {companyName}
+          </small>
+          <div className="logo-container">
             <div className="logo">
-              <i className={this.logoClass(companyName)}></i>
+              {this.props.isScriptLoaded && this.logo(companyName)}
             </div>
           </div>
-          <div className="small-11 column">
-            <input ref={e=>this.input=e} defaultValue={this.props.value} placeholder="Vollständige adresse eingeben www."/>
+          <div className="input-container">
+            <input
+              ref={e => (this.input = e)}
+              defaultValue={this.props.value}
+              placeholder="Vollständige adresse eingeben www."
+            />
           </div>
         </div>
       </div>
@@ -36,4 +46,4 @@ class SocialInput extends Input {
   }
 }
 
-export default SocialInput
+export default scriptLoader(fontawesome)(SocialInput)
