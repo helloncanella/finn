@@ -10,10 +10,11 @@ class ImageInput extends Input {
   constructor(props) {
     super()
 
-    this.inputValue = props.value 
+    this.inputValue = props.value
 
     this.state = {
-      imagePreview: props.getImage && props.value ? props.getImage(props.value) : null,
+      imagePreview:
+        props.getImage && props.value ? props.getImage(props.value) : null,
       showCropper: false,
       previewBeforeCrop: null
     }
@@ -26,6 +27,8 @@ class ImageInput extends Input {
     this.onDrop = this.onDrop.bind(this)
     this.deleteImage = this.deleteImage.bind(this)
     this.getImageFileFromCanvas = this.getImageFileFromCanvas.bind(this)
+
+    this.allowedTypes = ["png", "jpg", "jpeg"]
   }
 
   value() {
@@ -40,7 +43,7 @@ class ImageInput extends Input {
   }
 
   cleanVariables() {
-    this.inputValue= null
+    this.inputValue = null
     this.droppedFile = null
 
     this.setState({
@@ -96,7 +99,7 @@ class ImageInput extends Input {
     const canvas = this.cropper.getCroppedCanvas()
     const imagePreview = canvas.toDataURL()
     let self = this
-    const {name, type} = self.droppedFile
+    const { name, type } = self.droppedFile
 
     return new Promise((resolve, reject) => {
       const callback = blob => {
@@ -138,14 +141,35 @@ class ImageInput extends Input {
     )
   }
 
-  onDrop([file]) {
+  isAllowedType(file){
+    const isAllowed = !!this.allowedTypes.filter(type => file.type.endsWith(type)).length
+
+    if (!file.type || !isAllowed) {
+      sweetAlert({
+        title: "Format not allowed",
+        text: `Use one of the following formats: ${this
+          .allowedTypes.join(", ")}`,
+        type:"error"        
+      })
+
+      return false
+    }
+
+    return true
+  }
+  
+  processDroppedFile(file){
     this.droppedFile = file
     const preview = _.get(file, "preview")
     preview && this.setState({ imagePreview: preview, showCropper: true })
   }
 
+  onDrop([file]) {
+    if(!this.isAllowedType(file)) return
+    this.processDroppedFile(file)
+  }
+
   dropZone() {
-    
     /**
      * - Important: the ref input is used to mark the border of the component when it receives the 
      * prop "required".
@@ -153,8 +177,12 @@ class ImageInput extends Input {
      * */
 
     return (
-      <div className="drop-dropzone" ref={e=>this.input=e}>
-        <Dropzone multiple={false} onDrop={this.onDrop} className="drag-and-drop">
+      <div className="drop-dropzone" ref={e => (this.input = e)}>
+        <Dropzone
+          multiple={false}
+          onDrop={this.onDrop}
+          className="drag-and-drop"
+        >
           <h4>Drag and drop</h4>
           <h6>oder</h6>
           <h4>Hochladen</h4>
@@ -167,8 +195,8 @@ class ImageInput extends Input {
     return (
       <div className="image">
         <img src={this.state.imagePreview} />
-        {this.state.previewBeforeCrop &&
-          <a onClick={this.redoCrop}>redo</a>}{"  "}
+        {this.state.previewBeforeCrop && <a onClick={this.redoCrop}>redo</a>}
+        {"  "}
         {<a onClick={this.deleteImage}>delete</a>}
       </div>
     )
@@ -184,16 +212,14 @@ class ImageInput extends Input {
     )
   }
 
-  
-
   render() {
     const { imagePreview: preview, showCropper } = this.state
-    
+
     return (
       <div className="image-input">
         <div className="row">
           <div className="small-6 large-4 column image">
-            <div className="input" >
+            <div className="input">
               {showCropper && this.cropperComponent()}
               {!showCropper && preview && this.imagePreview()}
               {!showCropper && !preview && this.dropZone()}
@@ -216,11 +242,28 @@ ImageInput.propTypes = {
   id: PropTypes.string,
   deleteImage: PropTypes.func.isRequired,
   saveImage: PropTypes.func.isRequired,
-  preview: PropTypes.string,
+  preview: PropTypes.string
 }
 
 function blobToFile(theBlob, fileName) {
   theBlob.lastModifiedDate = new Date()
   theBlob.name = fileName
   return theBlob
+}
+
+if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+    var subjectString = this.toString()
+    if (
+      typeof position !== "number" ||
+      !isFinite(position) ||
+      Math.floor(position) !== position ||
+      position > subjectString.length
+    ) {
+      position = subjectString.length
+    }
+    position -= searchString.length
+    var lastIndex = subjectString.lastIndexOf(searchString, position)
+    return lastIndex !== -1 && lastIndex === position
+  }
 }
