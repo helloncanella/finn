@@ -3,8 +3,7 @@ import Input from "./Input.jsx"
 // import FontAwesome from 'react-fontawesome'
 //
 
-import scriptLoader from "react-async-script-loader"
-const fontawesome = "https://use.fontawesome.com/037d1e9b1a.js"
+
 
 class SocialInput extends Input {
   logo(companyName) {
@@ -30,7 +29,7 @@ class SocialInput extends Input {
           </small>
           <div className="logo-container">
             <div className="logo">
-              {this.props.isScriptLoaded && this.logo(companyName)}
+              {this.logo(companyName)}
             </div>
           </div>
           <div className="input-container">
@@ -46,4 +45,4 @@ class SocialInput extends Input {
   }
 }
 
-export default scriptLoader(fontawesome)(SocialInput)
+export default SocialInput

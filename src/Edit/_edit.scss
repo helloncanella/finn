@@ -84,6 +84,10 @@
                 border-radius: 50%;
                 background: #bac5db;
                 margin: 0 auto;
+
+                &.with-error{
+                  background: $red-peats !important;
+                }
               }
 
               .description {

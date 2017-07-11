@@ -5,6 +5,7 @@ class Stepper extends Component {
     super()
     this.state = {
       stepIndex: 0,
+      error: null
     }
 
     this.next = this.next.bind(this)
@@ -13,6 +14,8 @@ class Stepper extends Component {
     this.onAdvance = this.onAdvance.bind(this)
 
     this.steps = []
+
+    this.stepsWithError = []
   }
 
   next() {
@@ -24,33 +27,55 @@ class Stepper extends Component {
       this.setState({ stepIndex: --this.state.stepIndex })
   }
 
-  alertError(message){
+  setError(message) {
     this.props.onError && this.props.onError(message)
+    this.setState({ error: message })
+
   }
 
+  cleanError() {
+    //turning the bullet color green again.
+    this.stepsWithError[this.state.stepIndex] = false
+    this.setState({ error: null })
+  }
+
+  validateStep(stepIndex) {
+    const step = _.get(this.steps, stepIndex)
+
+    try {
+      step.validate && step.validate()
+    } catch (e) {
+      const error = e.message || e.reason
+      this.setError(error)
+      console.error(error)
+      
+      //it is used to decide if the bullet color is red.
+      this.stepsWithError[stepIndex] = true
+      
+      return false
+    }
+
+    return true
+  }
 
   onAdvance() {
+    this.cleanError()
+
     const step = this.steps && this.steps[this.state.stepIndex]
 
     if (step) {
-      try {
-        step.validate && step.validate()
-      } catch (e) {
-        const error = e.message || e.reason
-        this.alertError(error)
-        console.error(error)
-        return
-      }
+      const stepIsValidated = this.validateStep(this.state.stepIndex)
 
-      if (step.getValues && this.props.save) {
-        this.props.save(step.getValues(), err => {
-          if(err) this.alertError(err.reason)
-        })
-        
-      }
+      if (stepIsValidated) {
+        if (step.getValues && this.props.save) {
+          this.props.save(step.getValues(), err => {
+            if (err) this.setError(err.reason)
+          })
+        }
 
-      if (!this.isLastStep()) {
-        this.next()
+        if (!this.isLastStep()) {
+          this.next()
+        }
       }
     }
   }
@@ -112,7 +137,14 @@ class Stepper extends Component {
     )
   }
 
+  validateLowerSteps(clickedStepIndex) {
+    for (let stepIndex = clickedStepIndex - 1; stepIndex >= 0; --stepIndex) {
+      this.validateStep(stepIndex)
+    }
+  }
+
   changeStep(stepIndex) {
+    this.validateLowerSteps(stepIndex)
     this.setState({ stepIndex })
   }
 
@@ -126,13 +158,15 @@ class Stepper extends Component {
       const pastClass = index < this.state.stepIndex ? "past" : ""
       const changeStep = () => this.changeStep(index)
 
+      const errorClass = this.stepsWithError[index] ? "with-error" : ""
+
       return (
         <div
           className={`step ${pastClass} ${destakClass}`}
           key={`step-${index}`}
           onClick={changeStep}
         >
-          <div className="bullet" />
+          <div className={`bullet ${errorClass}`} />
           <h6 className="description">
             {name}
           </h6>

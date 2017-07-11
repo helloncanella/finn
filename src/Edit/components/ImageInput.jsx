@@ -158,7 +158,7 @@ class ImageInput extends Input {
     return true
   }
   
-  processDroppedFile(file){
+  processDroppedFile(file){    
     this.droppedFile = file
     const preview = _.get(file, "preview")
     preview && this.setState({ imagePreview: preview, showCropper: true })
@@ -166,6 +166,7 @@ class ImageInput extends Input {
 
   onDrop([file]) {
     if(!this.isAllowedType(file)) return
+    this.cleanError()
     this.processDroppedFile(file)
   }
 
@@ -207,7 +208,7 @@ class ImageInput extends Input {
       <div className="info">
         <p>Das Bild muss dem Format … ensprechen </p>
         <p>Folgende Dateienformate können hochgeladen werden: </p>
-        <p className="black">jpeg, .png, …</p>
+        <p className="black"><b>{this.allowedTypes.join(", ")}</b></p>
       </div>
     )
   }
@@ -239,10 +240,10 @@ export default ImageInput
 
 ImageInput.propTypes = {
   required: PropTypes.boolean,
-  id: PropTypes.string,
   deleteImage: PropTypes.func.isRequired,
   saveImage: PropTypes.func.isRequired,
-  preview: PropTypes.string
+  value: PropTypes.object,
+  getImage: PropTypes.func
 }
 
 function blobToFile(theBlob, fileName) {

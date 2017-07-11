@@ -1,4 +1,4 @@
-export function role() {}
+export function role() {return "Anbieter"}
 export function saveImage(image) {
   console.log(image)
   return { id: "123546" }

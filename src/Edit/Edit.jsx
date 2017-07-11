@@ -12,9 +12,10 @@ import { saveImage, getImageUrl } from "./helpers.js"
             //   console.log(i)
             //   callback()
             // }}
+import scriptLoader from "react-async-script-loader"
+const fontawesome = "https://use.fontawesome.com/037d1e9b1a.js"
 
-
-export default class EditPage extends Component {
+class EditPage extends Component {
   saveImage = (file, pathToUpdate) => {
     const userId = this.props.user._id
     return saveImage({ file, userId, pathToUpdate }, err => {
@@ -47,6 +48,8 @@ export default class EditPage extends Component {
   }
  
   render() {
+    if(!this.props.isScriptLoaded) return null
+    
     const {
       saveUser: save,
       user: userData,
@@ -57,11 +60,12 @@ export default class EditPage extends Component {
     const commonProps = { userData }
     const isAnbieter = userData.meta.role === "Anbieter"
 
+
     return (
       <div className="profile-edit">
         <Stepper save={save} onError={onError} userImage={this.profileImage()}>
-          {/*<Profile name="Profil" {...commonProps} />*/}
-          {/*<Contact name="Kontakt" {...commonProps} />*/}
+          <Profile name="Profil" {...commonProps} />
+          <Contact name="Kontakt" {...commonProps} />
           <Images
             name="Bilder"
             {...commonProps}
@@ -69,15 +73,16 @@ export default class EditPage extends Component {
             deleteImage={deleteImage}
             getImage={this.getImage}
           />
-          {/*<Social name="Socialmedia" {...commonProps} />
+          <Social name="Socialmedia" {...commonProps} />
           {isAnbieter &&
             <Services
               name="Service"
               {...commonProps}
               possibleValues={anbieterServices}
-            />}*/}
+            />}
         </Stepper>
       </div>
     )
   }
 }
+ export default scriptLoader(fontawesome)(EditPage)

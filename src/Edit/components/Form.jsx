@@ -11,9 +11,11 @@ class Form extends Component {
     const inputValue = {}
 
     Object.keys(this.inputs).forEach(name => {
-      _.set(inputValue, name, this.inputs[name].value())
+      const value = this.inputs[name].value()
+      value && _.set(inputValue, name, this.inputs[name].value())
     })
 
+    console.log(inputValue)
     return inputValue
   }
 

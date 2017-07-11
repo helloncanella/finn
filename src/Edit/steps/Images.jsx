@@ -44,7 +44,7 @@ class Images extends Form {
           deleteImage={deleteImage}
           getImage={imageInfo=>getImageUrl({src:imageInfo})}
           ref={e => (this.inputs[thePath] = e)}
-          required
+          required={index===0}
         />
       )
     })
