@@ -4,6 +4,9 @@ import { Textarea, DraftTextarea } from "./../components/Textarea"
 import Form from "../components/Form"
 import Header from "../components/SectionHeader"
 import _ from "lodash"
+import {role} from "../helpers"
+
+
 
 class Profile extends Form {
   constructor() {
@@ -19,21 +22,26 @@ class Profile extends Form {
       können jederzeit von Ihnen Bearbeitet und rausgenommen werden.`
     }
 
+    const isAnbieter = role(userData) === "Anbieter"
+    const isBerater = role(userData) === "Berater"
+
     return (
       <section className="profile">
         <Header {...headerProps} />
         <div className="inputs">
           <div className="row">
-            <div className="small-6">
-              <Input
-                maxChar={50}
-                ref={e => (this.inputs["profile.about.name"] = e)}
-                slug="Name"
-                value={_.get(userData, "profile.about.name")}
-                inputProps={{ placeholder: "Name Eigeben" }}
-              />
-            </div>
-            <div className="small-6">
+            {isAnbieter &&
+              <div className="small-6">
+                <Input
+                  maxChar={50}
+                  ref={e => (this.inputs["profile.about.name"] = e)}
+                  slug="Name"
+                  value={_.get(userData, "profile.about.name")}
+                  inputProps={{ placeholder: "Name Eigeben" }}
+                  required
+                />
+              </div>}
+            <div className={isBerater ? "small-12" : "small-6"}>
               <Input
                 type={"number"}
                 ref={e => (this.inputs["profile.about.founded"] = e)}
@@ -45,17 +53,19 @@ class Profile extends Form {
                   step: "1",
                   placeholder: "Datum Eingeben TT.MM.JJ"
                 }}
-              />
+                required
+              /> 
             </div>
             <div className="small-12 column">
               <div className="row">
                 <div className="small-6">
                   <Input
-                    maxChar={50}
-                    //ref={e => (this.inputs["profile.kunden"] = e)}
-                    slug="Kunden"
-                    value="Finn, I didn't find a path for this field"
+                    ref={e =>
+                      (this.inputs["profile.about.testimonial.name"] = e)}
+                    slug="Kundenzitat Kundename"
+                    value={_.get(userData, "profile.about.testimonial.name")}
                     inputProps={{ placeholder: "Kunden Auflisten" }}
+                    required
                   />{" "}
                 </div>
                 <div className="small-4 large-3 column">
@@ -73,7 +83,7 @@ class Profile extends Form {
                   slug="Kurzbeschreibung"
                   value={_.get(userData, "profile.about.shortdescription")}
                   horizontalLayout
-
+                  required
                 />
               </div>
             </div>
@@ -85,6 +95,7 @@ class Profile extends Form {
                   slug="Unternehmens beschreibung"
                   value={_.get(userData, "profile.about.description")}
                   horizontalLayout
+                  required
                 />
               </div>
             </div>
@@ -96,6 +107,7 @@ class Profile extends Form {
                   slug="Werte"
                   value={_.get(userData, "profile.about.values")}
                   horizontalLayout
+                  required
                 />
               </div>
             </div>
@@ -107,6 +119,7 @@ class Profile extends Form {
                   slug="Kundenzitat"
                   value={_.get(userData, "profile.about.testimonial.text")}
                   horizontalLayout
+                  required
                 />
               </div>
             </div>
@@ -115,7 +128,7 @@ class Profile extends Form {
       </section>
     )
   }
-  
+
   render() {
     const { userData } = this.props
 

@@ -42,12 +42,7 @@ class Textarea extends Input {
         <div className={charCountClasses.join(" ")}>
           {this.state.chars}/{this.props.maxChar}
         </div>
-        <div
-          className="error"
-          style={{ float: 'left', visibility: this.state.error ? "visible" : "hidden" }}
-        >
-          {this.state.error || "error"}
-        </div>
+        {this.error()}
       </div>
     )
 
@@ -81,17 +76,21 @@ class Textarea extends Input {
   }
 }
 
-const DraftTextarea = React.createClass({
-  getInitialState() {
-    let { value } = this.props
-    return {
+class DraftTextarea extends Input {
+  constructor(props) {
+    super(props)
+    let { value } = props
+
+    this.state = {
       words: value ? this.countWordsFromHtml(value) : 0,
-      editorState: this.fillEditor(),
+      editorState: this.fillEditor(props),
       value: value
     }
-  },
-  fillEditor() {
-    let { value } = this.props
+
+  }
+
+  fillEditor = props => {
+    let { value } = props
     if (!value) {
       return Draft.EditorState.createEmpty()
     }
@@ -101,31 +100,29 @@ const DraftTextarea = React.createClass({
     let editorState = Draft.EditorState.createWithContent(contentState)
 
     return editorState
-  },
-  countWordsFromHtml(value) {
+  }
+
+  countWordsFromHtml = value => {
     var regex = /\s+/gi
     var wordCount = value.trim().replace(regex, " ").split(" ").length
     return wordCount
-  },
+  }
   isCloseTo() {
     if (this.state.words * 1.2 > this.props.maxWords) return true
     else return false
-  },
-  onEditorStateChange(editorState) {
+  }
+
+  onEditorStateChange = editorState => {
     let value = stateToHTML(editorState.getCurrentContent()),
-      words = this.countWordsFromHtml(value)
+    words = this.countWordsFromHtml(value)
     value = forceHTTPS(value)
 
     this.setState({ editorState, value, words })
-  },
+  }
 
   value() {
     return this.state.value
-  },
-
-  validate() {
-    this.props.validator && this.props.validator()
-  },
+  }
 
   render() {
     let charCountClasses = "float-right char-count "
@@ -154,7 +151,7 @@ const DraftTextarea = React.createClass({
     }
 
     const editor = (
-      <div className="editorContainer">
+      <div className="editorContainer" ref={e => (this.input = e)}>
         <div className="editorWrapper">
           <Editor
             toolbar={toolbar}
@@ -176,10 +173,6 @@ const DraftTextarea = React.createClass({
     const label = (
       <label>
         {this.props.slug}
-        {/*{this.props.maxWords &&
-            <div className={charCountClasses}>
-              Wörter - {this.state.words}/{this.props.maxWords}
-            </div>}*/}
         {!this.props.horizontalLayout && editor}
       </label>
     )
@@ -193,6 +186,7 @@ const DraftTextarea = React.createClass({
             </div>
             <div className="small-9 large-10 column">
               {editor}
+              {this.error()}
             </div>
           </div>
         </div>
@@ -205,24 +199,6 @@ const DraftTextarea = React.createClass({
       </div>
     )
   }
-})
-
-///* <DraftEditor text={this.props.changeHandler} textFromDB={this.fillEditor(this.props.value)} /> */
-
-{
-  // <textarea
-  //   type={this.props.type || "text"}
-  //   value={this.props.value}
-  //   placeholder={this.props.slug}
-  //   onChange={e => {
-  //     this.props.changeHandler({
-  //       value: e.target.value,
-  //       target: this.props.target
-  //     })
-  //     this.setState({ chars: e.target.value.length })
-  //   }}
-  //   maxLength={this.props.maxChar}
-  // />
 }
 
 Textarea.propTypes = {

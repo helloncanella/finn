@@ -5,6 +5,14 @@ import Form from "../components/Form"
 import Header from "../components/SectionHeader"
 import _ from "lodash"
 
+const validateEmail = email=>{
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  
+  if(!re.test(email)){
+    throw new Error("Invalid email format")
+  }
+}
+
 class Contact extends Form {
   constructor() {
     super()
@@ -29,6 +37,7 @@ class Contact extends Form {
                 slug="Name"
                 value={_.get(userData, "profile.contact.name")}
                 inputProps={{ placeholder: "Name Eigeben" }}
+                required
               />
             </div>
             <div className="small-6">
@@ -38,6 +47,7 @@ class Contact extends Form {
                 slug="Rolle im Unternehmen"
                 value={_.get(userData, "profile.contact.title")}
                 inputProps={{ placeholder: "Rolle im Unternehmen" }}
+                required
               />
             </div>
             <div className="small-6">
@@ -55,7 +65,7 @@ class Contact extends Form {
                 slug="Emailadresse"
                 value={_.get(userData, "profile.contact.email")}
                 inputProps={{ placeholder: "Emailadresse" }}
-                //validator={}
+                validator={validateEmail}
               />
             </div>
 
@@ -66,6 +76,7 @@ class Contact extends Form {
                   slug="Website"
                   value={_.get(userData, "profile.contact.website")}
                   inputProps={{ placeholder: "Vollständige Domain: www. " }}
+                  required
                 />
               </div>
             </div>
@@ -76,6 +87,7 @@ class Contact extends Form {
                   slug="Anschrift"
                   value={_.get(userData, "profile.contact.address")}
                   inputProps={{ placeholder: "Kunden Auflisten" }}
+                  required
                 />
                 {/**TODO:add map**/}
               </div>
@@ -98,3 +110,4 @@ class Contact extends Form {
 }
 
 export default Contact
+

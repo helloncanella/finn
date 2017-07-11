@@ -8,22 +8,24 @@ import "./OldEdit/editor.scss"
 import anbieter from "./Edit/fake-anbieter.json"
 import servicesList from "./Edit/services-list.json"
 
+const saveImage = image => {
+      console.log(image);
+      return {id:"123546"}
+    }
 const edit = (
   <Edit
     user={anbieter}
     saveUser={oi => console.log(oi)}
     anbieterServices={servicesList}
-    saveImage={image => console.log(image)}
     deleteImage={(i, callback) => {
       console.log(i)
       callback()
     }}
-    getImage={getImage}
   />
 )
 
 // import "./ImageInput/_image-input.scss"
-import ImageInput from "./ImageInput/ImageInput"
+// import ImageInput from "./ImageInput/ImageInput"
 
 export default class App extends React.Component {
   render() {

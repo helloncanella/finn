@@ -6,11 +6,12 @@ class Input extends React.Component {
     this.state = {
       error: ""
     }
+    this.isEmpty = this.isEmpty.bind(this)
   }
 
   //add verification if the input is empty
 
-  value() {
+  value(){
     return this.input.value
   }
 
@@ -20,16 +21,16 @@ class Input extends React.Component {
   }
 
   markBorder() {
-    this.input.style.border = "1px solid #ea5153"
+    this.input && (this.input.style.border = "1px solid #ea5153")
   }
 
   cleanError() {
     this.setState({error: ''})
-    this.input.style = null
+    this.input && (this.input.style = null)
   }
 
-  isEmpty=()=>{
-    if(this.props.required && !this.input.value){
+  isEmpty(){
+    if(this.props.required && !this.value()){
       throw new Error("required")
     }
   }
@@ -44,13 +45,20 @@ class Input extends React.Component {
     validators = [].concat(this.isEmpty, ...validators)
 
     try {
-      validators.length && validators.forEach(validator => validator())
+      validators.length && validators.forEach(validator => validator(this.value()))
     } catch (e) {
       const error = e.message || e.reason
       this.setError(error)
       throw new Error(error)
     }
 
+  }
+
+ error(){
+    const style =  {visibility: this.state.error ? "visible" : "hidden" }
+    const props ={ className:"error",style}
+
+    return <div {...props}> {this.state.error || "error"}</div>
   }
 
   render() {
@@ -68,12 +76,7 @@ class Input extends React.Component {
             maxLength={this.props.maxChar}
             {...this.props.inputProps}
           />
-          <div
-            className="error"
-            style={{ visibility: error ? "visible" : "hidden" }}
-          >
-            {error || "error"}
-          </div>
+          {this.error()}
         </label>
       </div>
     )

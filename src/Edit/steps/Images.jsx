@@ -5,22 +5,25 @@ import Form from "../components/Form"
 import Header from "../components/SectionHeader"
 import ImageInput from "../components/ImageInput"
 import _ from "lodash"
+import {getImageUrl} from '../helpers.js'
 
 class Images extends Form {
   constructor() {
     super()
     this.inputs = []
     this.state = {
-      companiesInputsComponents:[]
+      companiesInputsComponents: []
     }
   }
 
-  componentDidMount(){
-    this.setState({
-      companiesInputsComponents: this.getImageInputs("profile.about.images")
-    })
+  componentDidMount() {
+    if(_.get(this.props.userData, "meta.role")==="Anbieter"){
+      this.setState({
+        companiesInputsComponents: this.getImageInputs("profile.about.images")
+      })
+    }
   }
-
+  
   getImageInputs(path) {
     const { saveImage, deleteImage, getImage, userData } = this.props
 
@@ -31,18 +34,17 @@ class Images extends Form {
 
     const imagesInputs = images.map((imagePath, index) => {
       const { id } = imagePath
-      const preview = getImage(id)
-
-      let thePath = valueIsArray ? `${path}.${index}.id` : `${path}.id`
+      let thePath = valueIsArray ? `${path}.${index}` : `${path}`
 
       return (
         <ImageInput
-          id={id}
           key={thePath}
-          preview={preview}
-          saveImage={saveImage}
+          value={_.get(userData, thePath)}
+          saveImage={file => saveImage(file, thePath)}
           deleteImage={deleteImage}
+          getImage={imageInfo=>getImageUrl({src:imageInfo})}
           ref={e => (this.inputs[thePath] = e)}
+          required
         />
       )
     })
@@ -68,13 +70,15 @@ class Images extends Form {
 
   addCompanyImageInput = () => {
     const { companiesInputsComponents } = this.state
-    const {length} =  companiesInputsComponents 
+    const { length } = companiesInputsComponents
     const path = `profile.about.images.${length}.id`
+    const saveImage = file => this.props.saveImage(file, path)
 
     const props = {
       key: path,
       ref: e => (this.inputs[path] = e),
-      ..._.pick(this.props, ["saveImage", "deleteImage"])
+      saveImage,
+      ..._.pick(this.props, ["deleteImage"])
     }
 
     this.setState({
@@ -109,13 +113,50 @@ class Images extends Form {
     )
   }
 
+  contactImage() {
+    const headerProps = {
+      title: "Kontakt Bild",
+      description: ""
+    }
+
+    const path = "profile.contact.image"
+
+    return (
+      <section className="company-images">
+        <Header {...headerProps} />
+        <div className="inputs">
+          {this.getImageInputs(path)}
+        </div>
+        
+      </section>
+    )
+  }
+
+  anbieterView() {
+    return (
+      <div className="anbieter-view">
+        {this.logo()}
+        {this.companyImages()}
+      </div>
+    )
+  }
+
+  beraterView() {
+    return (
+      <div className="berater-view">
+        {this.contactImage()}
+      </div>
+    )
+  }
+
   render() {
     const { userData } = this.props
+    const role = _.get(userData, "meta.role")
 
     return (
       <div className="form" style={this.props.style}>
-        {this.logo()}
-        {this.companyImages()}
+        {role === "Anbieter" && this.anbieterView()}
+        {role === "Berater" && this.beraterView()}
       </div>
     )
   }

@@ -4,15 +4,16 @@ import Cropper from "react-cropper"
 import _ from "lodash"
 import sweetAlert from "sweetalert"
 import PropTypes from "prop-types"
+import Input from "./Input.jsx"
 
-class ImageInput extends Component {
+class ImageInput extends Input {
   constructor(props) {
     super()
 
-    this.imageId = props.id
+    this.inputValue = props.value
 
     this.state = {
-      imagePreview: props.preview,
+      imagePreview: props.getImage(props.value),
       showCropper: false,
       previewBeforeCrop: null
     }
@@ -24,21 +25,22 @@ class ImageInput extends Component {
 
     this.onDrop = this.onDrop.bind(this)
     this.deleteImage = this.deleteImage.bind(this)
+    this.getImageFileFromCanvas = this.getImageFileFromCanvas.bind(this)
   }
 
   value() {
-    if (this.imageId) {
-      return this.imageId
+    if (this.inputValue) {
+      return this.inputValue
     } else if (this.droppedFile) {
-      const imageId = this.props.saveImage(this.droppedFile)
-      return imageId
+      this.inputValue = this.props.saveImage(this.droppedFile)
+      return this.inputValue
     }
 
     return ""
   }
 
   cleanVariables() {
-    this.imageId = null
+    this.inputValue= null
     this.droppedFile = null
 
     this.setState({
@@ -49,9 +51,9 @@ class ImageInput extends Component {
   }
 
   deleteImage() {
-    if (this.imageId) {
+    if (this.inputValue) {
       const callback = () =>
-        this.props.deleteImage(this.imageId, err => {
+        this.props.deleteImage(this.inputValue, err => {
           if (err)
             sweetAlert({
               title: "Error",
@@ -93,14 +95,16 @@ class ImageInput extends Component {
   getImageFileFromCanvas() {
     const canvas = this.cropper.getCroppedCanvas()
     const imagePreview = canvas.toDataURL()
+    let self = this
+    const {name, type} = self.droppedFile
 
     return new Promise((resolve, reject) => {
       const callback = blob => {
-        this.droppedFile = blobToFile(blob, "name")
+        self.droppedFile = blobToFile(blob, name)
         resolve(imagePreview)
       }
 
-      if (canvas.toBlob) canvas.toBlob(callback)
+      if (canvas.toBlob) canvas.toBlob(callback, type)
       else if (canvas.msToBlob) callback(canvas.msToBlob())
       else {
         sweetAlert("Bitte updaten Sie Ihren Browser")
@@ -134,19 +138,28 @@ class ImageInput extends Component {
     )
   }
 
-  onDrop(file) {
+  onDrop([file]) {
     this.droppedFile = file
-    const preview = _.get(file, "0.preview")
+    const preview = _.get(file, "preview")
     preview && this.setState({ imagePreview: preview, showCropper: true })
   }
 
   dropZone() {
+    
+    /**
+     * - Important: the ref input is used to mark the border of the component when it receives the 
+     * prop "required".
+     * - More info: see component Input.jsx
+     * */
+
     return (
-      <Dropzone multiple={false} onDrop={this.onDrop} className="drag-and-drop">
-        <h4>Drag and drop</h4>
-        <small>other</small>
-        <h4>Hochladen</h4>
-      </Dropzone>
+      <div className="drop-dropzone" ref={e=>this.input=e}>
+        <Dropzone multiple={false} onDrop={this.onDrop} className="drag-and-drop">
+          <h4>Drag and drop</h4>
+          <h6>oder</h6>
+          <h4>Hochladen</h4>
+        </Dropzone>
+      </div>
     )
   }
 
@@ -171,16 +184,21 @@ class ImageInput extends Component {
     )
   }
 
+  
+
   render() {
     const { imagePreview: preview, showCropper } = this.state
-
+    
     return (
       <div className="image-input">
         <div className="row">
           <div className="small-6 large-4 column image">
-            {showCropper && this.cropperComponent()}
-            {!showCropper && preview && this.imagePreview()}
-            {!showCropper && !preview && this.dropZone()}
+            <div className="input" >
+              {showCropper && this.cropperComponent()}
+              {!showCropper && preview && this.imagePreview()}
+              {!showCropper && !preview && this.dropZone()}
+            </div>
+            {this.error()}
           </div>
           <div className="small-6 large-8 column">
             {this.info()}
@@ -194,10 +212,11 @@ class ImageInput extends Component {
 export default ImageInput
 
 ImageInput.propTypes = {
+  required: PropTypes.boolean,
   id: PropTypes.string,
   deleteImage: PropTypes.func.isRequired,
   saveImage: PropTypes.func.isRequired,
-  preview: PropTypes.string
+  preview: PropTypes.string,
 }
 
 function blobToFile(theBlob, fileName) {

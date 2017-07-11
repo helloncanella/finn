@@ -299,6 +299,10 @@
     .image {
       position: relative;
 
+      img{
+        display: block;
+      }
+
       a {
         color: gray;
         cursor: pointer;
