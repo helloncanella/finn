@@ -30,6 +30,7 @@ class Services extends Form {
               value={_.get(userData, "profile.services.list")}
               ref={e => (this.inputs["profile.services.list"] = e)}
               possibleValues={this.props.possibleValues}
+              required
             />
           </div>
         </section>

@@ -8,10 +8,6 @@ import Services from "./steps/Services.jsx"
 
 import { saveImage, getImageUrl } from "./helpers.js"
 
-            // deleteImage={(i, callback) => {
-            //   console.log(i)
-            //   callback()
-            // }}
 import scriptLoader from "react-async-script-loader"
 const fontawesome = "https://use.fontawesome.com/037d1e9b1a.js"
 
@@ -49,7 +45,7 @@ class EditPage extends Component {
  
   render() {
     if(!this.props.isScriptLoaded) return null
-    
+
     const {
       saveUser: save,
       user: userData,

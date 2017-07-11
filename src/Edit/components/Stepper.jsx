@@ -137,14 +137,14 @@ class Stepper extends Component {
     )
   }
 
-  validateLowerSteps(clickedStepIndex) {
-    for (let stepIndex = clickedStepIndex - 1; stepIndex >= 0; --stepIndex) {
+  validateCurrentAndLowerSteps(clickedStepIndex) {
+    for (let stepIndex = clickedStepIndex ; stepIndex >= 0; --stepIndex) {
       this.validateStep(stepIndex)
     }
   }
 
   changeStep(stepIndex) {
-    this.validateLowerSteps(stepIndex)
+    this.validateCurrentAndLowerSteps(stepIndex)
     this.setState({ stepIndex })
   }
 
