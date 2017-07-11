@@ -71,7 +71,7 @@ class Images extends Form {
   addCompanyImageInput = () => {
     const { companiesInputsComponents } = this.state
     const { length } = companiesInputsComponents
-    const path = `profile.about.images.${length}.id`
+    const path = `profile.about.images.${length}`
     const saveImage = file => this.props.saveImage(file, path)
 
     const props = {

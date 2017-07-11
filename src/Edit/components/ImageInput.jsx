@@ -10,10 +10,10 @@ class ImageInput extends Input {
   constructor(props) {
     super()
 
-    this.inputValue = props.value
+    this.inputValue = props.value 
 
     this.state = {
-      imagePreview: props.getImage(props.value),
+      imagePreview: props.getImage && props.value ? props.getImage(props.value) : null,
       showCropper: false,
       previewBeforeCrop: null
     }
