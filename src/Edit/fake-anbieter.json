@@ -66,5 +66,9 @@
   "services": {
     "password": {},
     "resume": {}
+  },
+  "zip":{
+    "id":123113,
+    "name":"lero lero.png"
   }
 }

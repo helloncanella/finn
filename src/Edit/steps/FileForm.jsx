@@ -29,8 +29,11 @@ class FileForm extends Form {
             <FileInput
               ref={ref => (this.inputs["zip"] = ref)}
               value={_.get(userData, "zip")}
-              uploadFile={file => console.log(file)}
-              deleteFile={id => console.log(id)}
+              uploadFile={(file,callback) => {
+                console.log(file)
+                setTimeout(()=>callback(null, "12345"),500)
+              }}
+              deleteFile={(value,callback) => {console.log(value), callback()}}
               required
             />
           </div>

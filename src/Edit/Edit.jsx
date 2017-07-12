@@ -76,7 +76,7 @@ class EditPage extends Component {
               {...commonProps}
               possibleValues={anbieterServices}
             />}*/}
-          <FileForm name="Zip./ Anhang" />
+          <FileForm name="Zip./ Anhang" {...commonProps} />
         </Stepper>
       </div>
     )

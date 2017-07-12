@@ -472,25 +472,71 @@ $red-peats: #ea5153;
       display: inline-block;
       cursor: pointer;
 
-      &:not(:first-child){
+      &:not(:first-child) {
         margin-left: 1rem;
       }
 
-      &.upload, &.discard{
-         font-size: 1rem;
-         padding: 8px 20px;
-         margin-top: -1.5rem;
-         margin-bottom: 1rem;
-         color:white;
-         border-radius: 5px;
+      &.upload,
+      &.discard {
+        font-size: 1rem;
+        padding: 8px 20px;
+        margin-top: -1.5rem;
+        margin-bottom: 1rem;
+        color: white;
+        border-radius: 5px;
       }
 
-      &.upload{
+      &.upload {
         background: $green;
       }
 
-      &.discard{
+      &.discard {
         background: $red-peats;
+      }
+
+      
+    }
+
+    .action-buttons{
+      .loading {
+        display: inline-block;
+        position: relative;
+        top: 9px;
+        margin-left: 1rem;
+      }
+    }
+
+    .uploaded-file{
+
+      .title{
+        
+      }
+
+      .file{
+        max-width: 200px;
+        text-align: center;
+        color: gray;
+
+
+
+        .icon{
+          display:inline-block;
+          margin-top: 0.8rem;
+          font-size: 4rem;
+          margin-bottom: 0.8rem;
+          color: inherit;
+        }
+        .name{
+          font-size: 0.8em;
+          margin-bottom: 0.8rem;
+          color: inherit
+        }
+
+        .delete{
+          text-decoration: underline;
+          color: inherit;
+          cursor: pointer;
+        }
       }
     }
 
