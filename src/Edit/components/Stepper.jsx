@@ -117,9 +117,9 @@ class Stepper extends Component {
     return (
       <div className="controls row">
         <div className="content">
-          <h6 className="error">
+          {/*<h6 className="error">
             {this.state.error}
-          </h6>
+          </h6>*/}
           {back}
           {next}
         </div>
