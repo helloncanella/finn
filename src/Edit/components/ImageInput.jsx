@@ -6,6 +6,8 @@ import sweetAlert from "sweetalert"
 import PropTypes from "prop-types"
 import Input from "./Input.jsx"
 
+import {isAllowedType} from "../helpers.js"
+
 class ImageInput extends Input {
   constructor(props) {
     super()
@@ -141,22 +143,7 @@ class ImageInput extends Input {
     )
   }
 
-  isAllowedType(file){
-    const isAllowed = !!this.allowedTypes.filter(type => file.type.endsWith(type)).length
-
-    if (!file.type || !isAllowed) {
-      sweetAlert({
-        title: "Format not allowed",
-        text: `Use one of the following formats: ${this
-          .allowedTypes.join(", ")}`,
-        type:"error"        
-      })
-
-      return false
-    }
-
-    return true
-  }
+  
   
   processDroppedFile(file){    
     this.droppedFile = file
@@ -165,7 +152,7 @@ class ImageInput extends Input {
   }
 
   onDrop([file]) {
-    if(!this.isAllowedType(file)) return
+    if(!isAllowedType(file, this.allowedTypes)) return
     this.cleanError()
     this.processDroppedFile(file)
   }

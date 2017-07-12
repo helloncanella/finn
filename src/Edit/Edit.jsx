@@ -60,7 +60,7 @@ class EditPage extends Component {
     return (
       <div className="profile-edit">
         <Stepper save={save} onError={onError} userImage={this.profileImage()}>
-          {/*<Profile name="Profil" {...commonProps} />
+          <Profile name="Profil" {...commonProps} />
           <Contact name="Kontakt" {...commonProps} />
           <Images
             name="Bilder"
@@ -75,8 +75,18 @@ class EditPage extends Component {
               name="Service"
               {...commonProps}
               possibleValues={anbieterServices}
-            />}*/}
-          <FileForm name="Zip./ Anhang" {...commonProps} />
+            />}
+          <FileForm
+            name="Zip./ Anhang"
+            {...commonProps}
+            deleteFile={(value, callback) => {
+              console.log(value), callback()
+            }}
+            uploadFile={(file, callback) => {
+              console.log(file)
+              setTimeout(() => callback(null, "12345"), 500)
+            }}
+          />
         </Stepper>
       </div>
     )
