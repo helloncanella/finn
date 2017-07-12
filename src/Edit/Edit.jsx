@@ -9,7 +9,9 @@ import Services from "./steps/Services.jsx"
 import { saveImage, getImageUrl } from "./helpers.js"
 
 import scriptLoader from "react-async-script-loader"
-const fontawesome = "https://use.fontawesome.com/037d1e9b1a.js"
+// const fontawesome = "https://use.fontawesome.com/037d1e9b1a.js"
+
+const fontawesome = ""
 
 class EditPage extends Component {
   saveImage = (file, pathToUpdate) => {

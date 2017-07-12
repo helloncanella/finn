@@ -39,6 +39,7 @@
     "react-dropzone": "^3.13.3",
     "react-gsap-enhancer": "^0.3.0",
     "react-image-crop": "^2.0.5",
+    "react-input-mask": "^1.0.5",
     "react-loading": "^0.1.4",
     "sass-loader": "^4.0.2",
     "sweetalert": "^1.1.3",

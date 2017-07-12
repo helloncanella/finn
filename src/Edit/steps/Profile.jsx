@@ -4,9 +4,16 @@ import { Textarea, DraftTextarea } from "./../components/Textarea"
 import Form from "../components/Form"
 import Header from "../components/SectionHeader"
 import _ from "lodash"
-import {role} from "../helpers"
+import { role } from "../helpers"
 
+const validateDate = (input="") => {
+  const [full, day, month, year] = input.match(/(\d{2})\.(\d{2})\.(\d{4})/) || []
 
+  if(!moment(`${year}-${month}-${day}`).isValid()){
+    throw new Error("Invalid date")
+  }
+
+}
 
 class Profile extends Form {
   constructor() {
@@ -24,8 +31,6 @@ class Profile extends Form {
 
     const isAnbieter = role(userData) === "Anbieter"
     const isBerater = role(userData) === "Berater"
-
-    
 
     return (
       <section className="profile">
@@ -45,18 +50,16 @@ class Profile extends Form {
               </div>}
             <div className={isBerater ? "small-12" : "small-6"}>
               <Input
-                type={"number"}
                 ref={e => (this.inputs["profile.about.founded"] = e)}
                 value={_.get(userData, "profile.about.founded")}
+                mask="99.99.9999"
                 slug="Gründung"
+                validator={validateDate}
                 inputProps={{
-                  min: "1970",
-                  max: "2020",
-                  step: "1",
                   placeholder: "Datum Eingeben TT.MM.JJ"
                 }}
                 required
-              /> 
+              />
             </div>
             <div className="small-12 column">
               <div className="row">

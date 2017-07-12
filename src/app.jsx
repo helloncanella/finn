@@ -8,6 +8,8 @@ import "./OldEdit/editor.scss"
 import anbieter from "./Edit/fake-anbieter.json"
 import servicesList from "./Edit/services-list.json"
 
+import scriptLoader from "react-async-script-loader"
+
 const saveImage = image => {
       console.log(image);
       return {id:"123546"}
@@ -27,7 +29,7 @@ const edit = (
 // import "./ImageInput/_image-input.scss"
 // import ImageInput from "./ImageInput/ImageInput"
 
-export default class App extends React.Component {
+ class App extends React.Component {
   render() {
     // const imageInput = (
     //   <ImageInput
@@ -39,10 +41,14 @@ export default class App extends React.Component {
     //   />
     // )
     // return imageInput
-
+    // console.log(moment)
+    
+    if (!this.props.isScriptLoaded) return null
     return edit
   }
 }
+const momentjs = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"
+export default scriptLoader(momentjs)(App)
 
 function getImage () {
   return "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Rio_De_Janeiro_-_Rafael_Defavari.jpg/700px-Rio_De_Janeiro_-_Rafael_Defavari.jpg"

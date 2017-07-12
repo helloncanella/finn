@@ -1,4 +1,5 @@
 import React from "react"
+import InputMask from "react-input-mask"
 
 class Input extends React.Component {
   constructor() {
@@ -9,9 +10,7 @@ class Input extends React.Component {
     this.isEmpty = this.isEmpty.bind(this)
   }
 
-  //add verification if the input is empty
-
-  value(){
+  value() {
     return this.input.value
   }
 
@@ -25,12 +24,12 @@ class Input extends React.Component {
   }
 
   cleanError() {
-    this.setState({error: ''})
+    this.setState({ error: "" })
     this.input && (this.input.style = null)
   }
 
-  isEmpty(){
-    if(this.props.required && !this.value()){
+  isEmpty() {
+    if (this.props.required && !this.value()) {
       throw new Error("required")
     }
   }
@@ -45,32 +44,58 @@ class Input extends React.Component {
     validators = [].concat(this.isEmpty, ...validators)
 
     try {
-      validators.length && validators.forEach(validator => validator(this.value()))
+      validators.length &&
+        validators.forEach(validator => validator(this.value()))
     } catch (e) {
       const error = e.message || e.reason
       this.setError(error)
       throw new Error(error)
     }
-
   }
 
- error(){
-    const style =  {visibility: this.state.error ? "visible" : "hidden" }
-    const props ={ className:"error",style}
+  error() {
+    const style = { visibility: this.state.error ? "visible" : "hidden" }
+    const props = { className: "error", style }
 
-    return <div {...props}> {this.state.error || "error"}</div>
+    return (
+      <div {...props}>
+        {" "}{this.state.error || "error"}
+      </div>
+    )
   }
 
   render() {
     const { error } = this.state
 
+    const maskProps = _.pick(this.props, [
+      "mask",
+      "alwaysShowMask",
+      "maskChar",
+      "formatChars"
+    ])
+
+
+    const ref = e=>{
+      /**
+       * @hellon
+       * 
+       * NOTE: for some reason I don't know, the value of "e" comes null in a 
+       * second rendering.
+       * 
+       * That is the reason why I'm conditionally assigning the value of this.input.
+       * **/
+
+      e && (this.input = e.input)
+    }
+
     return (
       <div className="small-12 columns">
         <label>
           {this.props.slug}
-          <input
+          <InputMask
+            {...maskProps}
             defaultValue={this.props.value || ""}
-            ref={e => (this.input = e)}
+            ref={ref}
             type={this.props.type || "text"}
             placeholder={this.props.slug}
             maxLength={this.props.maxChar}
