@@ -422,6 +422,7 @@
 
   .services-input {
     margin-bottom: 4.5rem;
+    
     .service {
       float: left;
       position: relative;
@@ -450,6 +451,11 @@
         background: #52bd8f;
         color: white;
       }
+    }
+
+    .error{
+      clear: both;
+      padding-top: 0.6rem;
     }
 
     &::after {

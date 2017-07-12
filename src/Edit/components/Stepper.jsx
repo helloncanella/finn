@@ -136,14 +136,15 @@ class Stepper extends Component {
     )
   }
 
-  validateCurrentAndLowerSteps(clickedStepIndex) {
-    for (let stepIndex = clickedStepIndex; stepIndex >= 0; --stepIndex) {
+  validateLowerSteps(clickedStepIndex) {
+    for (let stepIndex = clickedStepIndex-1; stepIndex >= 0; --stepIndex) {
       this.validateStep(stepIndex)
     }
   }
+  
 
   changeStep(stepIndex) {
-    this.validateCurrentAndLowerSteps(stepIndex)
+    this.validateLowerSteps(stepIndex)
     this.setState({ stepIndex })
   }
 
@@ -155,7 +156,10 @@ class Stepper extends Component {
       const name = child.props.name
       const destakClass = index === this.state.stepIndex ? "current" : ""
       const pastClass = index < this.state.stepIndex ? "past" : ""
-      const changeStep = () => this.changeStep(index)
+      const changeStep = () => {        
+        this.validateStep(this.state.stepIndex) //validate current step
+        this.changeStep(index)
+      }
 
       const errorClass = this.stepsWithError[index] ? "with-error" : ""
 

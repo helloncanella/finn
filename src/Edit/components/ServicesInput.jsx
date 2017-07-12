@@ -1,71 +1,81 @@
-import React, { Component } from 'react';
+import React, { Component } from "react"
+import Input from "./Input.jsx"
 
-class ServicesInput extends Component {
-  
-  constructor(props){
+class ServicesInput extends Input {
+  constructor(props) {
     super()
     this.state = {
       selectedServices: props.value || []
     }
   }
 
-  value(){
+  value() {
+    if (!this.state.selectedServices.length) return null
     return this.state.selectedServices
   }
 
-  remove(service){
+  remove(service) {
     const selectedServices = [...this.state.selectedServices]
 
     const index = selectedServices.indexOf(service)
     selectedServices.splice(index, 1)
 
-    this.setState({selectedServices})
+    this.setState({ selectedServices })
   }
 
-  add(service){
+  add(service) {
     const selectedServices = [...this.state.selectedServices].concat(service)
-    this.setState({selectedServices})
+    this.setState({ selectedServices })
   }
 
-  toggle(service){
-    const {selectedServices} = this.state
-    
-    if(selectedServices.includes(service)) {
+  toggle(service) {
+    const { selectedServices } = this.state
+
+    if (selectedServices.includes(service)) {
       this.remove(service)
-    } else{
+    } else {
       this.add(service)
     }
-
   }
 
-  services(){
-    const {possibleValues} = this.props
+  services() {
+    const { possibleValues } = this.props
 
-    const services = Object.keys(possibleValues).map((key, index)=>{
+    const services = Object.keys(possibleValues).map((key, index) => {
       const service = possibleValues[key]
-      const {name, shortcode} = service
+      const { name, shortcode } = service
 
-      const onClick = ()=>this.toggle(name)
-      const selectedClass = this.state.selectedServices.includes(name) ? 'selected' : ''
+      const onClick = () => this.toggle(name)
+      const selectedClass = this.state.selectedServices.includes(name)
+        ? "selected"
+        : ""
 
-      return( 
-        <div className={`service ${selectedClass}`} key={`service-${index}`} onClick={onClick}>
-          <h3 className="shortcode">{shortcode}</h3>
+      return (
+        <div
+          className={`service ${selectedClass}`}
+          key={`service-${index}`}
+          onClick={onClick}
+        >
+          <h3 className="shortcode">
+            {shortcode}
+          </h3>
         </div>
       )
-
     })
 
-    return services 
+    return services
   }
 
   render() {
     return (
       <div className="services-input">
-          {this.services()}     
+          {this.services()}
+
+
+        {this.error()}
       </div>
     )
   }
 }
 
-export default ServicesInput;
+export default ServicesInput
