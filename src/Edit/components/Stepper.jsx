@@ -30,7 +30,6 @@ class Stepper extends Component {
   setError(message) {
     this.props.onError && this.props.onError(message)
     this.setState({ error: message })
-
   }
 
   cleanError() {
@@ -48,10 +47,10 @@ class Stepper extends Component {
       const error = e.message || e.reason
       this.setError(error)
       console.error(error)
-      
+
       //it is used to decide if the bullet color is red.
       this.stepsWithError[stepIndex] = true
-      
+
       return false
     }
 
@@ -138,7 +137,7 @@ class Stepper extends Component {
   }
 
   validateCurrentAndLowerSteps(clickedStepIndex) {
-    for (let stepIndex = clickedStepIndex ; stepIndex >= 0; --stepIndex) {
+    for (let stepIndex = clickedStepIndex; stepIndex >= 0; --stepIndex) {
       this.validateStep(stepIndex)
     }
   }
@@ -181,17 +180,21 @@ class Stepper extends Component {
     )
   }
 
+  avatar() {
+    const style = {
+      background: `url(${this.props.userImage}) no-repeat center center`,
+      backgroundSize: "cover"
+    }
+    return <div className="avatar" style={style} />
+  }
+
   top() {
     return (
       <div className="top row">
         <div className="profile-info small-3 column">
           <h2 className="title">Profil Ansehen</h2>
           <h3 className="description">überblick über eigene Daten</h3>
-          <img
-            src="https://www.w3schools.com/w3css/img_avatar3.png"
-            alt="avatar"
-            className="avatar"
-          />
+          {this.avatar()}
         </div>
         <div className="all-steps small-9 column">
           <h2 className="title">Editieren</h2>

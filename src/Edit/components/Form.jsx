@@ -15,7 +15,6 @@ class Form extends Component {
       value && _.set(inputValue, name, this.inputs[name].value())
     })
 
-    console.log(inputValue)
     return inputValue
   }
 

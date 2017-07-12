@@ -32,15 +32,16 @@ class EditPage extends Component {
       Anbieter: "profile.about.logo.id",
       Berater: "profile.contact.image.id"
     }
-    const { userData } = this.props
+    const { user } = this.props
 
-    if (role in paths) return this.getImage(_.get(userData, paths[role]))
+    if (role in paths) return this.getImage(_.get(user, paths[role]))
+    
 
     return ""
   }
 
   role() {
-    return _.get(this.props.userData, "meta.role")
+    return _.get(this.props.user, "meta.role")
   }
  
   render() {

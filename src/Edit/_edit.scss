@@ -30,8 +30,9 @@
       .profile-info {
         border-right: 1px solid white;
 
-        img {
+        .avatar {
           display: block;
+         
 
           $s: 60px;
           width: $s;
