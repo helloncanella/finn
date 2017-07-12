@@ -5,13 +5,12 @@ import Contact from "./steps/Contact.jsx"
 import Images from "./steps/Images.jsx"
 import Social from "./steps/Social.jsx"
 import Services from "./steps/Services.jsx"
+import FileForm from "./steps/FileForm.jsx"
 
 import { saveImage, getImageUrl } from "./helpers.js"
 
 import scriptLoader from "react-async-script-loader"
-// const fontawesome = "https://use.fontawesome.com/037d1e9b1a.js"
-
-const fontawesome = ""
+const fontawesome = "https://use.fontawesome.com/037d1e9b1a.js"
 
 class EditPage extends Component {
   saveImage = (file, pathToUpdate) => {
@@ -37,7 +36,6 @@ class EditPage extends Component {
     const { user } = this.props
 
     if (role in paths) return this.getImage(_.get(user, paths[role]))
-    
 
     return ""
   }
@@ -45,9 +43,9 @@ class EditPage extends Component {
   role() {
     return _.get(this.props.user, "meta.role")
   }
- 
+
   render() {
-    if(!this.props.isScriptLoaded) return null
+    if (!this.props.isScriptLoaded) return null
 
     const {
       saveUser: save,
@@ -59,11 +57,10 @@ class EditPage extends Component {
     const commonProps = { userData }
     const isAnbieter = userData.meta.role === "Anbieter"
 
-
     return (
       <div className="profile-edit">
         <Stepper save={save} onError={onError} userImage={this.profileImage()}>
-          <Profile name="Profil" {...commonProps} />
+          {/*<Profile name="Profil" {...commonProps} />
           <Contact name="Kontakt" {...commonProps} />
           <Images
             name="Bilder"
@@ -78,10 +75,11 @@ class EditPage extends Component {
               name="Service"
               {...commonProps}
               possibleValues={anbieterServices}
-            />}
+            />}*/}
+          <FileForm name="Zip./ Anhang" />
         </Stepper>
       </div>
     )
   }
 }
- export default scriptLoader(fontawesome)(EditPage)
+export default scriptLoader(fontawesome)(EditPage)

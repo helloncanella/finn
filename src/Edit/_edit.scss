@@ -1,11 +1,12 @@
+$green: #82d0ae;
+$red-peats: #ea5153;
+
 .profile-edit {
   width: 100%;
   overflow-x: hidden;
   .stepper {
     padding: 10px;
     color: #838793;
-    $green: #82d0ae;
-    $red-peats: #ea5153;
 
     .error {
       color: $red-peats;
@@ -32,7 +33,6 @@
 
         .avatar {
           display: block;
-         
 
           $s: 60px;
           width: $s;
@@ -86,7 +86,7 @@
                 background: #bac5db;
                 margin: 0 auto;
 
-                &.with-error{
+                &.with-error {
                   background: $red-peats !important;
                 }
               }
@@ -304,7 +304,7 @@
     .image {
       position: relative;
 
-      img{
+      img {
         display: block;
       }
 
@@ -422,7 +422,7 @@
 
   .services-input {
     margin-bottom: 4.5rem;
-    
+
     .service {
       float: left;
       position: relative;
@@ -453,7 +453,7 @@
       }
     }
 
-    .error{
+    .error {
       clear: both;
       padding-top: 0.6rem;
     }
@@ -462,6 +462,62 @@
       display: block;
       content: '';
       clear: both;
+    }
+  }
+
+  .file-input {
+    .action-button {
+      padding: 5px 15px;
+      font-size: 0.9em;
+      display: inline-block;
+      cursor: pointer;
+
+      &:not(:first-child){
+        margin-left: 1rem;
+      }
+
+      &.upload, &.discard{
+         font-size: 1rem;
+         padding: 8px 20px;
+         margin-top: -1.5rem;
+         margin-bottom: 1rem;
+         color:white;
+         border-radius: 5px;
+      }
+
+      &.upload{
+        background: $green;
+      }
+
+      &.discard{
+        background: $red-peats;
+      }
+    }
+
+    .input-container {
+      .wrapper {
+        border: 1px solid #eef0f1;
+        padding: 5px;
+
+        input[type='file'] {
+          width: 0.1px;
+          height: 0.1px;
+          opacity: 0;
+          overflow: hidden;
+          position: absolute;
+          z-index: -1;
+
+          & + label {
+            margin: 0;
+            display: table;
+            background: #ffffff;
+
+            $c: #d2d2d2;
+            border: 1px solid $c;
+            color: $c;
+          }
+        }
+      }
     }
   }
 }
