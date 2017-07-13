@@ -215,6 +215,44 @@ $red-peats: #ea5153;
   .form {
     width: 100%;
 
+    .contact {
+      .map {
+        height: 200px;
+
+        .poster {
+          position: relative;
+          $h: 80px;
+          height: $h;
+
+          $w: $h*3;
+          width: $w;
+
+          left: -80px;
+          top: -50px;
+
+          $ratio: 0.4;
+
+          $image-width: $w*$ratio;
+          .image {
+            position: absolute;
+            height: 100%;
+            width: $image-width;
+          }
+
+          .description-side {
+            background: white;
+            padding: 0.8rem;
+            font-size: 0.8rem;
+            height: 100%;
+            position: absolute;
+            left: $image-width;
+            width: $w*(1-$ratio);
+            padding-bottom: 3rem;
+          }
+        }
+      }
+    }
+
     .row {
       margin-top: 0.9rem;
     }
@@ -274,6 +312,11 @@ $red-peats: #ea5153;
         @media screen and (min-width: 960px) {
           font-size: initial;
         }
+      }
+
+      .address-input {
+        position: relative;
+        z-index: 1;
       }
 
       .textarea {
@@ -493,11 +536,9 @@ $red-peats: #ea5153;
       &.discard {
         background: $red-peats;
       }
-
-      
     }
 
-    .action-buttons{
+    .action-buttons {
       .loading {
         display: inline-block;
         position: relative;
@@ -506,33 +547,29 @@ $red-peats: #ea5153;
       }
     }
 
-    .uploaded-file{
-
-      .title{
-        
+    .uploaded-file {
+      .title {
       }
 
-      .file{
+      .file {
         max-width: 200px;
         text-align: center;
         color: gray;
 
-
-
-        .icon{
-          display:inline-block;
+        .icon {
+          display: inline-block;
           margin-top: 0.8rem;
           font-size: 4rem;
           margin-bottom: 0.8rem;
           color: inherit;
         }
-        .name{
+        .name {
           font-size: 0.8em;
           margin-bottom: 0.8rem;
-          color: inherit
+          color: inherit;
         }
 
-        .delete{
+        .delete {
           text-decoration: underline;
           color: inherit;
           cursor: pointer;

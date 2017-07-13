@@ -5,6 +5,7 @@ import Form from "../components/Form"
 import Header from "../components/SectionHeader"
 import _ from "lodash"
 import AddressInput from "../components/AddressInput.jsx"
+import GoogleMapReact from "google-map-react"
 
 const validateEmail = email => {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -28,6 +29,11 @@ class Contact extends Form {
 
     this.complexInputs = {}
 
+    this.state = {
+      latlong: null,
+      address: null
+    }
+
     this.setInitalAddressData(userData)
 
     this.onSelectLocation = this.onSelectLocation.bind(this)
@@ -48,10 +54,21 @@ class Contact extends Form {
     const { address, latlong } = location
 
     this.setState({
-      latlong: this.values["profile.contact.latlong"] = latlong,
-      address: this.values["profile.contact.address"] = address
+      latlong: (this.values["profile.contact.latlong"] = latlong),
+      address: (this.values["profile.contact.address"] = address)
     })
-    
+  }
+
+  map() {
+    const { lat, long: lng } = this.values["profile.contact.latlong"]
+    const image = this.props.userImage
+    const userName = _.get(this.props.userData, "profile.contact.name")
+
+    return (
+      <GoogleMapReact center={{ lat, lng }} defaultZoom={11}>
+        <Poster lat={lat} lng={lng} image={image} title={userName} />
+      </GoogleMapReact>
+    )
   }
 
   contact(userData) {
@@ -120,7 +137,7 @@ class Contact extends Form {
                 <AddressInput
                   onSelect={this.onSelectLocation}
                   ref={ref => (this.complexInputs["address"] = ref)}
-                  slug="Anschrift"                  
+                  slug="Anschrift"
                   className="small-12 columns"
                   value={{
                     address: this.values["profile.contact.address"],
@@ -130,7 +147,9 @@ class Contact extends Form {
                   validator={validateLocation}
                   required
                 />
-                {/**TODO:add map**/}
+                <div className="map small-12 medium-8 large-5 columns">
+                  {this.map()}
+                </div>
               </div>
             </div>
           </div>
@@ -151,3 +170,21 @@ class Contact extends Form {
 }
 
 export default Contact
+
+function Poster({ image, title }) {
+  const imageStyle = {
+    background: `url(${image}) no-repeat center center`,
+    backgroundSize: "cover"
+  }
+
+  return (
+    <div className="poster">
+      <div className="small-5 image" style={imageStyle} />
+      <div className="small-7 description-side">
+        <div className="title">
+          {title}
+        </div>
+      </div>
+    </div>
+  )
+}

@@ -55,13 +55,14 @@ class EditPage extends Component {
     } = this.props
     const commonProps = { userData }
     const isAnbieter = userData.meta.role === "Anbieter"
+    const userImage = this.profileImage()
 
     return (
       <div className="profile-edit">
-        <Stepper save={save} onError={onError} userImage={this.profileImage()}>
-          {/*<Profile name="Profil" {...commonProps} />*/}
-          <Contact name="Kontakt" {...commonProps} />
-          {/*<Images
+        <Stepper save={save} onError={onError} userImage={userImage}>
+          <Profile name="Profil" {...commonProps} />
+          <Contact name="Kontakt" {...commonProps} userImage={userImage}/>
+          <Images
             name="Bilder"
             {...commonProps}
             saveImage={this.saveImage}
@@ -74,8 +75,8 @@ class EditPage extends Component {
               name="Service"
               {...commonProps}
               possibleValues={anbieterServices}
-            />}*/}
-          {/*<FileForm
+            />}
+          <FileForm
             name="Zip./ Anhang"
             {...commonProps}
             deleteFile={(value, callback) => {
@@ -85,7 +86,7 @@ class EditPage extends Component {
               console.log(file)
               setTimeout(() => callback(null, "12345"), 500)
             }}
-          />*/}
+          />
         </Stepper>
       </div>
     )

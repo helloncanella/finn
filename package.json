@@ -21,6 +21,7 @@
     "draft-js": "^0.10.1",
     "draft-js-export-html": "^0.5.4",
     "extract-text-webpack-plugin": "^2.1.0",
+    "google-map-react": "^0.24.0",
     "gsap": "^1.19.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",

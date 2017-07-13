@@ -50,8 +50,7 @@ class AddressInput extends Input {
     if (error) this.setState({ latlong: null })
   }
 
-  render() {
-  
+  render() {  
 
     return (
       <div className={`address-input ${this.props.className}`}>
