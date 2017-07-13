@@ -10,7 +10,6 @@ import FileForm from "./steps/FileForm.jsx"
 import { saveImage, getImageUrl } from "./helpers.js"
 
 import scriptLoader from "react-async-script-loader"
-const fontawesome = "https://use.fontawesome.com/037d1e9b1a.js"
 
 class EditPage extends Component {
   saveImage = (file, pathToUpdate) => {
@@ -60,9 +59,9 @@ class EditPage extends Component {
     return (
       <div className="profile-edit">
         <Stepper save={save} onError={onError} userImage={this.profileImage()}>
-          <Profile name="Profil" {...commonProps} />
+          {/*<Profile name="Profil" {...commonProps} />*/}
           <Contact name="Kontakt" {...commonProps} />
-          <Images
+          {/*<Images
             name="Bilder"
             {...commonProps}
             saveImage={this.saveImage}
@@ -75,8 +74,8 @@ class EditPage extends Component {
               name="Service"
               {...commonProps}
               possibleValues={anbieterServices}
-            />}
-          <FileForm
+            />}*/}
+          {/*<FileForm
             name="Zip./ Anhang"
             {...commonProps}
             deleteFile={(value, callback) => {
@@ -86,10 +85,15 @@ class EditPage extends Component {
               console.log(file)
               setTimeout(() => callback(null, "12345"), 500)
             }}
-          />
+          />*/}
         </Stepper>
       </div>
     )
   }
 }
-export default scriptLoader(fontawesome)(EditPage)
+
+const fontawesome = "https://use.fontawesome.com/037d1e9b1a.js"
+const googlemaps =
+  "https://maps.googleapis.com/maps/api/js?key=AIzaSyB9xX-RV3bm-aHBcESRYI4_J-T59wDlswI&libraries=places"
+
+export default scriptLoader([fontawesome, googlemaps])(EditPage)

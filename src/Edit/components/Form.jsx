@@ -2,17 +2,29 @@ import React, { Component } from "react"
 import _ from "lodash"
 
 class Form extends Component {
-  constructor(){
+  constructor() {
     super()
-    this.inputs = []
+
+    //define each value
+    this.inputs = {}
+    this.complexInputs = {}
+    this.values = {}
+    
   }
 
   getValues() {
     const inputValue = {}
 
-    Object.keys(this.inputs).forEach(name => {
-      const value = this.inputs[name].value()
-      value && _.set(inputValue, name, this.inputs[name].value())
+    const inputs = { ...this.inputs, ...this.values }
+
+    Object.keys(inputs).forEach(name => {
+      const input = inputs[name]
+
+      let value
+      if (!!input.value) value = input.value()
+      else value = input
+
+      value && _.set(inputValue, name, value)
     })
 
     return inputValue
@@ -24,22 +36,24 @@ class Form extends Component {
 
     !Array.isArray(validators) && (validators = [validators])
 
-    Object.keys(this.inputs).forEach(name => {
-      const input = this.inputs[name]
+    const inputs = { ...this.inputs, ...this.complexInputs }
+
+    Object.keys(inputs).forEach(name => {
+      const input = inputs[name]
 
       if (input.value) {
         const value = input.value()
         validators.forEach(validator => validator(value))
       }
 
-      try{
+      try {
         input.validate && input.validate()
-      }catch(e){
+      } catch (e) {
         caughtError = true
       }
     })
 
-    if(caughtError) throw new Error('one or more fields are invalid')
+    if (caughtError) throw new Error("one or more fields are invalid")
   }
 }
 

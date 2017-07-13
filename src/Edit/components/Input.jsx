@@ -74,8 +74,7 @@ class Input extends React.Component {
       "formatChars"
     ])
 
-
-    const ref = e=>{
+    const ref = e => {
       /**
        * @hellon
        * 

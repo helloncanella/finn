@@ -4,19 +4,54 @@ import { Textarea, DraftTextarea } from "./../components/Textarea"
 import Form from "../components/Form"
 import Header from "../components/SectionHeader"
 import _ from "lodash"
+import AddressInput from "../components/AddressInput.jsx"
 
-const validateEmail = email=>{
+const validateEmail = email => {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  
-  if(!re.test(email)){
+
+  if (!re.test(email)) {
     throw new Error("Invalid email format")
   }
 }
 
+const validateLocation = location => {
+  const { lat = "", long = "" } = location.latlong || {}
+  if (!lat || !long) throw new Error("Address not located")
+}
+
 class Contact extends Form {
-  constructor() {
+  constructor({ userData }) {
     super()
-    this.inputs = []
+
+    this.inputs = {}
+    this.values = {}
+
+    this.complexInputs = {}
+
+    this.setInitalAddressData(userData)
+
+    this.onSelectLocation = this.onSelectLocation.bind(this)
+  }
+
+  setInitalAddressData(userData) {
+    this.values["profile.contact.latlong"] = _.get(
+      userData,
+      "profile.contact.latlong"
+    )
+    this.values["profile.contact.address"] = _.get(
+      userData,
+      "profile.contact.address"
+    )
+  }
+
+  onSelectLocation(location) {
+    const { address, latlong } = location
+
+    this.setState({
+      latlong: this.values["profile.contact.latlong"] = latlong,
+      address: this.values["profile.contact.address"] = address
+    })
+    
   }
 
   contact(userData) {
@@ -82,11 +117,17 @@ class Contact extends Form {
             </div>
             <div className="small-12 column">
               <div className="row textarea-field">
-                <Input 
-                  ref={e => (this.inputs["profile.contact.address"] = e)}
-                  slug="Anschrift"
-                  value={_.get(userData, "profile.contact.address")}
+                <AddressInput
+                  onSelect={this.onSelectLocation}
+                  ref={ref => (this.complexInputs["address"] = ref)}
+                  slug="Anschrift"                  
+                  className="small-12 columns"
+                  value={{
+                    address: this.values["profile.contact.address"],
+                    latlong: this.values["profile.contact.latlong"]
+                  }}
                   inputProps={{ placeholder: "Kunden Auflisten" }}
+                  validator={validateLocation}
                   required
                 />
                 {/**TODO:add map**/}
@@ -110,4 +151,3 @@ class Contact extends Form {
 }
 
 export default Contact
-
